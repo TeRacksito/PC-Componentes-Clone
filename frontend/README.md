@@ -1,50 +1,32 @@
-# React + TypeScript + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project’s frontend is built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**. It uses **React Router DOM** for browser navigation and manages state via React hooks.
 
-Currently, two official plugins are available:
+## Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **App.tsx** – Root component that sets up main application routes and layout.
+- **main.tsx** – Entry point that renders the application into the DOM.
+- **components/** – Reusable presentational and logical components (Header, Footer, ProductCard, etc.).
+- **pages/** – Individual views or screens (Home, CategoryPage, ProductPage, etc.).
+- **hooks/** – Custom hooks for component logic reuse.
+- **public/** – Static files and assets that Vite serves directly.
+- **types/** – TypeScript interfaces and types (Product, Category, etc.).
 
-## Expanding the ESLint configuration
+## Technologies
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React** & **TypeScript** – Core libraries for building UI with static typing.
+- **Vite** – Fast build tool for development and production bundling.
+- **Tailwind CSS** – Utility-first CSS framework for styling.
+- **React Router DOM** – Declarative navigation and routing.
 
-- Configure the top-level `parserOptions` property like this:
+## Important Config Files
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **package.json** – Manages scripts (dev, build, test) and project dependencies.
+- **vite.config.ts** – Configures the development server URL, plugins (React, Tailwind), and bundling.
+- **tsconfig.app.json** – TypeScript compilation settings for frontend code.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Development
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Run `npm install` in the frontend directory to install dependencies.
+2. Use `docker compose watch` or `npm run dev` for local development with hot reloading.
+3. The frontend runs on [http://localhost:5012](http://localhost:5012) by default.
