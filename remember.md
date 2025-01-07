@@ -1,0 +1,1 @@
+Last task: Create component for breadcrumbs and use it in Category page
