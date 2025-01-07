@@ -16,9 +16,11 @@ export const getCategoryBySlug: RequestHandler = async (req, res, next) => {
 
     const breadcrumb = await getCategoryBreadcrumbFromDB(category);
 
-    res.json({ type: "category", data: category, breadcrumb });
+    res.json({ type: "category", data: { category, breadcrumb } });
     return;
-  } catch (error) { 
+  } catch (error) {
     next(error);
   }
 };
+
+

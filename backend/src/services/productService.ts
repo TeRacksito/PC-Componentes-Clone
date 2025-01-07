@@ -1,5 +1,10 @@
 import { Op, Order, Sequelize } from "sequelize";
 import { Category, Product, ProductCategory } from "../models";
+import {
+  CategoryTree,
+  getCategoryBreadcrumbFromDB,
+  getCategoryTreeFromDB,
+} from "./categoryService";
 
 export const getProductBySlugFromDB = async (slug: string) => {
   return await Product.findOne({ where: { id: slug } });
@@ -19,11 +24,10 @@ export const getProductsByCategorySlugFromDB = async (
   page: number = 1,
   limit: number = 40
 ) => {
-
   if (!ORDER_CRITERIA[orderCriteria]) {
     orderCriteria = DEFAULT_ORDER_CRITERIA;
   }
-  
+
   const category = await Category.findOne({ where: { id: slug } });
 
   if (category) {
@@ -58,7 +62,7 @@ export const getTotalProductsByCategorySlugFromDB = async (slug: string) => {
       ],
     });
   }
-}
+};
 
 export const getFeaturedProductsFromDB = async (targetLength: number = 6) => {
   let filter_categories: string[] = [];
@@ -113,4 +117,62 @@ export const getFeaturedProductsFromDB = async (targetLength: number = 6) => {
   }
 
   return chosenProducts;
+};
+
+const getAllCategoryIds = (tree: CategoryTree): string[] => {
+  let ids = [tree.id];
+
+  for (const child of tree.children) {
+    ids = ids.concat(getAllCategoryIds(child));
+  }
+
+  return ids;
+};
+
+export const getProductsByInheritedCategoriesFromDB = async (
+  category: Category,
+  orderCriteria: ORDER_CRITERIA_TYPE = DEFAULT_ORDER_CRITERIA,
+  page: number = 1,
+  limit: number = 40
+) => {
+  if (!ORDER_CRITERIA[orderCriteria]) {
+    orderCriteria = DEFAULT_ORDER_CRITERIA;
+  }
+
+  const categoryTree = await getCategoryTreeFromDB(category);
+
+  return await Product.findAll({
+    limit: limit,
+    offset: (page - 1) * limit,
+    order: ORDER_CRITERIA[orderCriteria],
+    include: [
+      {
+        model: Category,
+        where: {
+          id: {
+            [Op.in]: getAllCategoryIds(categoryTree),
+          },
+        },
+      },
+    ],
+  });
+};
+
+export const getTotalProductsByInheritedCategoriesFromDB = async (
+  category: Category
+) => {
+  const categoryTree = await getCategoryTreeFromDB(category);
+
+  return await Product.count({
+    include: [
+      {
+        model: Category,
+        where: {
+          id: {
+            [Op.in]: getAllCategoryIds(categoryTree),
+          },
+        },
+      },
+    ],
+  });
 };

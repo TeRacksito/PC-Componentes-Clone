@@ -56,3 +56,22 @@ export const getCategoryChildrenFromDB = async (category: Category) => {
     },
   });
 };
+
+export interface CategoryTree {
+  id: string;
+  name: string;
+  parent_id: string;
+  children: CategoryTree[];
+}
+export const getCategoryTreeFromDB = async (category: Category) => {
+  const children = await getCategoryChildrenFromDB(category);
+  const childrenWithTree: CategoryTree[] = await Promise.all(
+    children.map(async (child) => {
+      return {
+        ...child.get(),
+        children: (await getCategoryTreeFromDB(child)).children,
+      };
+    })
+  );
+  return { ...category.get(), children: childrenWithTree } as CategoryTree;
+};

@@ -5,4 +5,4 @@ import { getCategoryBySlug } from "../controllers/categoryController";
 export const categoryRoutes = express.Router();
 
 categoryRoutes.get("/:slug", getCategoryBySlug);
-categoryRoutes.get("/:slug/products/:orderCriteria?", getProductsByCategorySlug);
+categoryRoutes.get("/:slug/products/:filter?", getProductsByCategorySlug);

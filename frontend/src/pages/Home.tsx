@@ -27,12 +27,13 @@ export function Home() {
     fetchData();
   }, []);
 
-
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   if (data?.type != "home") {
     return <div>Not found</div>;
   }
-  
+
   return (
     <div className="space-y-10">
       <section className="bg-orange-500 text-white py-10 rounded-md">
@@ -47,7 +48,6 @@ export function Home() {
       <section className="container mx-auto">
         <h2 className="text-2xl font-semibold mb-6">Productos Destacados</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-
           {data.featuredProducts.map((product: Product) => (
             <ProductCard product={product} />
           ))}

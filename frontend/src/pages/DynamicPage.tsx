@@ -36,7 +36,7 @@ export function DynamicPage() {
   if (data?.type === "product") {
     return <ProductPage product={data.data} />;
   } else if (data?.type === "category") {
-    return <CategoryPage category={data.data} />;
+    return <CategoryPage category={data.data.category} breadcrumb={data.data.breadcrumb} />;
   } else {
     return <div>Not found</div>;
   }

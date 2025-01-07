@@ -25,7 +25,7 @@ export function LateralMenu({
     };
   }, [isOpen]);
 
-  // close menu ESC 
+  // close menu ESC
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === "Escape" && isOpen) {
@@ -42,7 +42,7 @@ export function LateralMenu({
     <>
       {/* Overlay */}
       <div
-        className="fixed inset-0 bg-black/50 z-40 cursor-pointer"
+        className="fixed inset-0 bg-black/50 z-40 cursor-pointer backdrop-blur-[1.5px]"
         onClick={toggleMenu}
         aria-hidden="true"
       ></div>

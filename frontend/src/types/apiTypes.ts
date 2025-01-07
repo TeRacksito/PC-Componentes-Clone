@@ -16,5 +16,5 @@ export interface Product {
 export interface Category {
   id: string;
   name: string;
-  breadcrumb: any[];
+  parent_id: string;
 }

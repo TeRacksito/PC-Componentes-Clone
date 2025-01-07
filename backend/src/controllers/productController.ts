@@ -6,7 +6,10 @@ import {
   DEFAULT_ORDER_CRITERIA,
   ORDER_CRITERIA_TYPE,
   getTotalProductsByCategorySlugFromDB,
+  getTotalProductsByInheritedCategoriesFromDB,
+  getProductsByInheritedCategoriesFromDB,
 } from "../services/productService";
+import { getCategoryBySlugFromDB } from "../services/categoryService";
 
 export const getProductBySlug: RequestHandler = async (req, res, next) => {
   try {
@@ -24,7 +27,7 @@ export const getProductBySlug: RequestHandler = async (req, res, next) => {
   }
 };
 
-const MAX_PRODUCTS_PER_PAGE = 40;
+const MAX_PRODUCTS_PER_PAGE = 20;
 export const getProductsByCategorySlug: RequestHandler = async (
   req,
   res,
@@ -34,17 +37,35 @@ export const getProductsByCategorySlug: RequestHandler = async (
     const { slug } = req.params;
 
     const orderCriteria =
-      req.params?.orderCriteria in ORDER_CRITERIA
-        ? (req.params?.orderCriteria as ORDER_CRITERIA_TYPE)
+      req.query?.orderCriteria &&
+      (req.query?.orderCriteria as string) in ORDER_CRITERIA
+        ? (req.query?.orderCriteria as ORDER_CRITERIA_TYPE)
         : DEFAULT_ORDER_CRITERIA;
 
-    const page =
+    let page =
       req.query?.page && !isNaN(Number(req.query?.page))
-        ? Math.min(Number(req.query?.page), 1)
+        ? Math.max(Number(req.query?.page), 1)
         : 1;
 
-    const products = await getProductsByCategorySlugFromDB(
-      slug,
+    const category = await getCategoryBySlugFromDB(slug);
+
+    if (!category) {
+      next();
+      return;
+    }
+
+    const totalProducts = await getTotalProductsByInheritedCategoriesFromDB(
+      category
+    );
+
+    const maxPages = Math.ceil(
+      (totalProducts || MAX_PRODUCTS_PER_PAGE) / MAX_PRODUCTS_PER_PAGE
+    );
+
+    page = Math.min(page, maxPages);
+
+    const products = await getProductsByInheritedCategoriesFromDB(
+      category,
       orderCriteria,
       page,
       MAX_PRODUCTS_PER_PAGE
@@ -55,14 +76,10 @@ export const getProductsByCategorySlug: RequestHandler = async (
       return;
     }
 
-    const totalProducts = await getTotalProductsByCategorySlugFromDB(slug);
-
     res.json({
       type: "products",
       page,
-      maxPages: Math.ceil(
-        (totalProducts || MAX_PRODUCTS_PER_PAGE) / MAX_PRODUCTS_PER_PAGE
-      ),
+      maxPages,
       orderCriteria,
       availableOrderCriteria: Object.keys(
         ORDER_CRITERIA

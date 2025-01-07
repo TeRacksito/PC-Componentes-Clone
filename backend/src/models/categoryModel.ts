@@ -9,7 +9,7 @@ import { Product } from "./productModel";
 //   `parent_id` varchar(255) DEFAULT NULL,
 //   PRIMARY KEY (`id`),
 //   KEY `parent_id` (`parent_id`),
-//   CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`)
+//   FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`)
 // )
 
 export class Category extends Model {
