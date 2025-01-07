@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Product } from "../../types/apiTypes";
 import { FaShop } from "react-icons/fa6";
 import PcLogo from "/pc-logo.svg";
+import { Link } from "react-router-dom";
 
 export function ProductCard({ product }: { product: Product }) {
   const [transform, setTransform] = useState({
@@ -41,7 +42,7 @@ export function ProductCard({ product }: { product: Product }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <a href={`/${product.id}`} className="block">
+      <Link to={`/${product.id}`} className="block">
         <div className="w-full flex items-center justify-center relative">
           {product.discount != "0" ? (
             <span className="absolute top-0 left-0 bg-red-700 text-white text-xs font-bold rounded px-2 py-1 z-10">
@@ -81,7 +82,7 @@ export function ProductCard({ product }: { product: Product }) {
             Vendido por: <b>{product.seller}</b>
           </div>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }
