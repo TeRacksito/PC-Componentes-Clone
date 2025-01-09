@@ -1,20 +1,18 @@
-import { Category } from "@pcc/shared";
+import { Category, CategoryWithBreadcrumb } from "@pcc/shared";
 import React from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 interface BreadcrumbProps {
-  breadcrumb: Category[];
-  category: Category;
+  categoryWithBreadcrumb: CategoryWithBreadcrumb;
 }
 
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({
-  breadcrumb,
-  category,
+  categoryWithBreadcrumb,
 }) => {
-  const breadcrumbWithHome = [
-    { id: "", name: "Home", parent_id: "" },
-    ...breadcrumb,
+  const breadcrumbWithHome: CategoryWithBreadcrumb[] = [
+    { id: "", name: "Home", parent_id: "", breadcrumb: [] },
+    ...categoryWithBreadcrumb.breadcrumb,
   ];
 
   return (
@@ -28,7 +26,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
             <FaChevronRight className="text-gray-500 mx-2" />
           </li>
         ))}
-        <li className="text-gray-500">{category.name}</li>
+        <li className="text-gray-500">{categoryWithBreadcrumb.name}</li>
       </ol>
     </nav>
   );

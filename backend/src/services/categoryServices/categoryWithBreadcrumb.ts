@@ -1,11 +1,8 @@
-import {
-  Category,
-  CategoryWithBreadcrumb,
-  extractProperties,
-} from "@pcc/shared";
+import { Category, CategoryWithBreadcrumb } from "@pcc/shared";
 import { getCategoryParentFromDB } from "./category";
+import { CategoryModel } from "../../models";
 
-export const getCategoryBreadcrumbFromDB = async (category: Category) => {
+export const getCategoryBreadcrumbFromDB = async (category: CategoryModel) => {
   const breadcrumb: CategoryWithBreadcrumb[] = [];
   while (true) {
     const parent = await getCategoryParentFromDB(category);
@@ -19,9 +16,9 @@ export const getCategoryBreadcrumbFromDB = async (category: Category) => {
   return breadcrumb.reverse();
 };
 
-export const getCategoryWithBreadcrumbFromDB = async (category: Category) => {
+export const getCategoryWithBreadcrumbFromDB = async (category: CategoryModel) => {
   return {
-    ...extractProperties<Category>(category),
+    ...category.get(),
     breadcrumb: await getCategoryBreadcrumbFromDB(category),
   } as CategoryWithBreadcrumb;
 };

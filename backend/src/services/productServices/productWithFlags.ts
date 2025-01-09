@@ -1,9 +1,9 @@
-import { extractProperties, Product, ProductWithFlags } from "@pcc/shared";
+import { Product, ProductWithFlags } from "@pcc/shared";
 import { FlagModel } from "../../models/flagsModel";
 import { ProductModel } from "../../models";
 
 export const getProductsWithFlagsByProductsFromDB = async (
-  ...products: Product[]
+  ...products: ProductModel[]
 ) => {
   const productsWithFlags: ProductWithFlags[] = [];
   for (const product of products) {
@@ -18,7 +18,7 @@ export const getProductsWithFlagsByProductsFromDB = async (
       ],
     });
     productsWithFlags.push({
-      ...extractProperties<Product>(product),
+      ...product.get(),
       flags,
     });
   }

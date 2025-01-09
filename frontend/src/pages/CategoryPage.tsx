@@ -4,7 +4,12 @@ import { Breadcrumb } from "../components/Breadcrumbs/Breadcrumbs";
 import { LinkButton } from "../components/Buttons/LinkButton";
 import { ProductCard } from "../components/ProductCard/ProductCard";
 import { PageNavigator } from "../components/Buttons/PageNavigator";
-import { Category, Product } from "@pcc/shared";
+import {
+  Category,
+  CategoryWithBreadcrumb,
+  PaginatedProducts,
+  Product,
+} from "@pcc/shared";
 
 const TRANSLATE_ORDER_CRITERIA: { [key: string]: string } = {
   offer: "Oferta",
@@ -13,11 +18,9 @@ const TRANSLATE_ORDER_CRITERIA: { [key: string]: string } = {
 };
 
 export function CategoryPage({
-  category,
-  breadcrumb,
+  categoryWithBreadcrumb,
 }: {
-  category: Category;
-  breadcrumb: Category[];
+  categoryWithBreadcrumb: CategoryWithBreadcrumb;
 }) {
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,9 +30,9 @@ export function CategoryPage({
 
   useEffect(() => {
     const fetchData = () => {
-      const url = `http://localhost:5011/${category.id}/products/${
-        window.location.pathname.split("/")[3] + location.search
-      }`;
+      const url = `http://localhost:5011/${
+        categoryWithBreadcrumb.id
+      }/products/${window.location.pathname.split("/")[3] + location.search}`;
 
       fetch(url)
         .then((response) => response.json())
@@ -46,7 +49,7 @@ export function CategoryPage({
     };
 
     fetchData();
-  }, [location.pathname, location.search, category.id]);
+  }, [location.pathname, location.search, categoryWithBreadcrumb.id]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -54,25 +57,20 @@ export function CategoryPage({
   if (!data || data.type !== "products") return <div>No products found</div>;
 
   const {
-    data: productsData,
+    products: productsData,
     page: currentPage,
     maxPages,
     orderCriteria,
     availableOrderCriteria,
     totalProducts,
-  }: {
-    data: Product[];
-    page: number;
-    maxPages: number;
-    orderCriteria: string;
-    availableOrderCriteria: string[];
-    totalProducts: number;
-  } = data.data;
+  } = data.data as PaginatedProducts;
 
   return (
     <div className="container mx-auto">
-      <Breadcrumb breadcrumb={breadcrumb} category={category} />
-      <h1 className="text-2xl font-semibold mb-6">{category.name}</h1>
+      <Breadcrumb categoryWithBreadcrumb={categoryWithBreadcrumb} />
+      <h1 className="text-2xl font-semibold mb-6">
+        {categoryWithBreadcrumb.name}
+      </h1>
       <div className="flex items-center justify-end mb-6 gap-4">
         <div className="grid grid-flow-col gap-2">
           {availableOrderCriteria.map((criteria) => (
