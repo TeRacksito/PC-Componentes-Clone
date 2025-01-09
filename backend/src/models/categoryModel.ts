@@ -1,7 +1,8 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/db";
-import { ProductCategory } from "./productCategoriesModel";
-import { Product } from "./productModel";
+import { ProductCategoryModel } from "./productCategoriesModel";
+import { ProductModel } from "./productModel";
+import { Category } from "@pcc/shared";
 
 // CREATE TABLE `categories` (
 //   `id` varchar(255) NOT NULL,
@@ -12,31 +13,35 @@ import { Product } from "./productModel";
 //   FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`)
 // )
 
-export class Category extends Model {
+export class CategoryModel extends Model implements Category {
   declare id: string;
   declare name: string;
   declare parent_id: string;
 
   public static associate() {
-    Category.belongsToMany(Product, {
-      through: ProductCategory,
+    CategoryModel.belongsToMany(ProductModel, {
+      through: ProductCategoryModel,
       foreignKey: "category_id",
       otherKey: "product_id",
     });
 
-    Category.hasMany(Category, {
+    CategoryModel.hasMany(ProductCategoryModel, {
+      foreignKey: "category_id",
+    });
+
+    CategoryModel.hasMany(CategoryModel, {
       foreignKey: "parent_id",
       as: "Children",
     });
 
-    Category.belongsTo(Category, {
+    CategoryModel.belongsTo(CategoryModel, {
       as: "Parent",
       foreignKey: "parent_id",
     });
   }
 }
 
-Category.init(
+CategoryModel.init(
   {
     id: {
       type: DataTypes.STRING,

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Product } from "../../types/apiTypes";
 import { FaShop } from "react-icons/fa6";
 import PcLogo from "/pc-logo.svg";
 import { Link } from "react-router-dom";
+import { Product } from "@pcc/shared";
 
 export function ProductCard({ product }: { product: Product }) {
   const [transform, setTransform] = useState({
@@ -44,7 +44,8 @@ export function ProductCard({ product }: { product: Product }) {
     >
       <Link to={`/${product.id}`} className="block">
         <div className="w-full flex items-center justify-center relative">
-          {product.discount != "0" ? (
+          
+          {product.discount != 0 ? (
             <span className="absolute top-0 left-0 bg-red-700 text-white text-xs font-bold rounded px-2 py-1 z-10">
               -{product.discount}%
             </span>
@@ -64,7 +65,7 @@ export function ProductCard({ product }: { product: Product }) {
           <span className="text-lg text-red-700 font-bold mb-4 mr-4">
             {Number(product.price).toFixed(2)}€
           </span>
-          {product.discount != "0" ? (
+          {product.discount != 0 ? (
             <span className="text-gray-500 line-through mr-2 text-sm">
               {(
                 Number(product.price) /

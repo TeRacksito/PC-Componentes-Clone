@@ -1,26 +1,26 @@
 import { RequestHandler } from "express";
-import {
-  getCategoryBreadcrumbFromDB,
-  getCategoryBySlugFromDB,
-} from "../services/categoryService";
+import { getCategoryModelBySlugFromDB } from "../services/categoryServices/category";
+import { wrapSuccessResponse } from "./responseWrapper";
+import { getCategoryWithBreadcrumbFromDB } from "../services/categoryServices/categoryWithBreadcrumb";
 
 export const getCategoryBySlug: RequestHandler = async (req, res, next) => {
   try {
     const { slug } = req.params;
-    const category = await getCategoryBySlugFromDB(slug);
+    const category = await getCategoryModelBySlugFromDB(slug);
 
     if (!category) {
       next();
       return;
     }
 
-    const breadcrumb = await getCategoryBreadcrumbFromDB(category);
-
-    res.json({ type: "category", data: { category, breadcrumb } });
+    res.json(
+      wrapSuccessResponse(
+        "category",
+        await getCategoryWithBreadcrumbFromDB(category)
+      )
+    );
     return;
   } catch (error) {
     next(error);
   }
 };
-
-

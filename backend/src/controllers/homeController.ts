@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
-import { getFeaturedProductsFromDB } from "../services/productService";
-import { getFeaturedCategoriesFromDB } from "../services/categoryService";
+import { getFeaturedProductsFromDB } from "../services/productServices/product";
+import { getFeaturedCategoriesFromDB } from "../services/categoryServices/category";
 
 export const getHome: RequestHandler = async (req, res, next) => {
   try {
@@ -10,6 +10,7 @@ export const getHome: RequestHandler = async (req, res, next) => {
       req.query?.products && !isNaN(Number(req.query?.products))
         ? Number(req.query?.products)
         : undefined;
+
     const featuredProducts = await getFeaturedProductsFromDB(requestedProducts);
     if (!featuredProducts) {
       throw new Error("No featured products found");
@@ -19,6 +20,7 @@ export const getHome: RequestHandler = async (req, res, next) => {
       req.query?.categories && !isNaN(Number(req.query?.categories))
         ? Number(req.query?.categories)
         : undefined;
+
     const featuredCategories = await getFeaturedCategoriesFromDB(
       requestedCategories
     );

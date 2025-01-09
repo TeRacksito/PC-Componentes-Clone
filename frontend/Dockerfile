@@ -2,9 +2,12 @@ FROM node:18
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY packages ./packages
+COPY frontend ./frontend
+COPY package*.json .
 RUN npm install
 
-COPY . .
+WORKDIR /usr/src/app/frontend
 
 CMD ["npm", "run", "dev", "--", "--host"]
+

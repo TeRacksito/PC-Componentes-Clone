@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { FaBars, FaShoppingCart, FaTimes, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
 import { LateralMenu } from "./LateralMenu";
 
 import PcLogo from "/pc-logo.svg";

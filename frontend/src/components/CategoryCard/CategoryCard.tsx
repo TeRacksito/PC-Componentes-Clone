@@ -1,5 +1,5 @@
+import { Category } from "@pcc/shared";
 import { Link } from "react-router-dom";
-import { Category } from "../../types/apiTypes";
 
 export function CategoryCard({ category }: { category: Category }) {
   return (

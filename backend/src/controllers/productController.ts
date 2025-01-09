@@ -1,23 +1,24 @@
 import { RequestHandler } from "express";
+import { wrapSuccessResponse } from "./responseWrapper";
 import {
-  getProductBySlugFromDB,
-  getProductsByCategorySlugFromDB,
-  ORDER_CRITERIA,
   DEFAULT_ORDER_CRITERIA,
-  ORDER_CRITERIA_TYPE,
-  getTotalProductsByCategorySlugFromDB,
-  getTotalProductsByInheritedCategoriesFromDB,
+  getProductModelBySlugFromDB,
   getProductsByInheritedCategoriesFromDB,
-} from "../services/productService";
-import { getCategoryBySlugFromDB } from "../services/categoryService";
+  getTotalProductsByInheritedCategoriesFromDB,
+  ORDER_CRITERIA,
+  ORDER_CRITERIA_TYPE,
+} from "../services/productServices/product";
+import { getCategoryModelBySlugFromDB } from "../services/categoryServices/category";
+import { PaginatedProducts } from "@pcc/shared";
+import { getProductsWithFlagsByProductsFromDB } from "../services/productServices/productWithFlags";
 
 export const getProductBySlug: RequestHandler = async (req, res, next) => {
   try {
     const { slug } = req.params;
-    const product = await getProductBySlugFromDB(slug);
+    const product = await getProductModelBySlugFromDB(slug);
 
     if (product) {
-      res.json({ type: "product", data: product });
+      res.json(wrapSuccessResponse("product", product));
       return;
     }
 
@@ -47,7 +48,7 @@ export const getProductsByCategorySlug: RequestHandler = async (
         ? Math.max(Number(req.query?.page), 1)
         : 1;
 
-    const category = await getCategoryBySlugFromDB(slug);
+    const category = await getCategoryModelBySlugFromDB(slug);
 
     if (!category) {
       next();
@@ -75,6 +76,28 @@ export const getProductsByCategorySlug: RequestHandler = async (
       next();
       return;
     }
+
+    const productsWithFlags = await getProductsWithFlagsByProductsFromDB(
+      ...products
+    );
+
+    if (!productsWithFlags) {
+      next();
+      return;
+    }
+
+    res.json(
+      wrapSuccessResponse("products", {
+        page,
+        maxPages,
+        orderCriteria,
+        availableOrderCriteria: Object.keys(
+          ORDER_CRITERIA
+        ) as ORDER_CRITERIA_TYPE[],
+        totalProducts,
+        products: productsWithFlags,
+      } as PaginatedProducts)
+    );
 
     res.json({
       type: "products",

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CategoryCard } from "../components/CategoryCard/CategoryCard";
-import { Category, Product } from "../types/apiTypes";
 import { ProductCard } from "../components/ProductCard/ProductCard";
+import { Category, Product } from "@pcc/shared";
 
 export function Home() {
   const [data, setData] = useState<any>(null);

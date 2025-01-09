@@ -67,7 +67,7 @@ PC-Componentes-Clone is a full-stack project designed to replicate the functiona
      ```cmd
       taskkill /F /PID [PID]
      ```
-  2. **Reset WinNAT**: If you are using Docker Desktop, try resetting the WinNAT network using privileged PowerShell.
+  2. **Reset WinNAT**: Try resetting the WinNAT network using privileged PowerShell.
      ```powershell
        net stop winnat
        net start winnat

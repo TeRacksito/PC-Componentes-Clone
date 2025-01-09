@@ -11,7 +11,8 @@ services:
 
   backend:
     build:
-      context: ./backend
+      context: .
+      dockerfile: ./backend/Dockerfile
     environment:
       DB_HOST: db
       DB_USER: root
@@ -25,7 +26,12 @@ services:
       watch:
         - action: sync
           path: ./backend
-          target: /usr/src/app
+          target: /usr/src/app/backend
+          ignore:
+            - node_modules
+        - action: sync
+          path: ./packages
+          target: /usr/src/app/packages
           ignore:
             - node_modules
     depends_on:
@@ -33,14 +39,20 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: .
+      dockerfile: ./frontend/Dockerfile
     ports:
       - "5012:5012"
     develop:
       watch:
         - action: sync
           path: ./frontend
-          target: /usr/src/app
+          target: /usr/src/app/frontend
+          ignore:
+            - node_modules
+        - action: sync
+          path: ./packages
+          target: /usr/src/app/packages
           ignore:
             - node_modules
 

@@ -1,8 +1,19 @@
-import { Category } from "./categoryModel";
-import { Product } from "./productModel";
-import { ProductCategory } from "./productCategoriesModel";
+import { CategoryModel } from "./categoryModel";
+import { ProductModel } from "./productModel";
+import { ProductCategoryModel } from "./productCategoriesModel";
+import { FlagModel } from "./flagsModel";
+import { ProductFlagModel } from "./productFlagsModel";
 
-Category.associate();
-Product.associate();
+CategoryModel.associate();
+ProductModel.associate();
+ProductCategoryModel.associate();
+FlagModel.associate();
+ProductFlagModel.associate();
 
-export { Category, Product, ProductCategory };
+export {
+  CategoryModel,
+  ProductModel,
+  ProductCategoryModel,
+  FlagModel,
+  ProductFlagModel,
+};

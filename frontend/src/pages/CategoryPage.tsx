@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import { Breadcrumb } from "../components/Breadcrumbs/Breadcrumbs";
 import { LinkButton } from "../components/Buttons/LinkButton";
 import { ProductCard } from "../components/ProductCard/ProductCard";
-import { Category, Product } from "../types/apiTypes";
 import { PageNavigator } from "../components/Buttons/PageNavigator";
+import { Category, Product } from "@pcc/shared";
 
 const TRANSLATE_ORDER_CRITERIA: { [key: string]: string } = {
   offer: "Oferta",
@@ -67,7 +67,7 @@ export function CategoryPage({
     orderCriteria: string;
     availableOrderCriteria: string[];
     totalProducts: number;
-  } = data;
+  } = data.data;
 
   return (
     <div className="container mx-auto">

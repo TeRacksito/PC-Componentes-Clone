@@ -1,5 +1,5 @@
+import { Category } from "@pcc/shared";
 import React from "react";
-import { Category } from "../../types/apiTypes";
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 

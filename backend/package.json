@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node src/server.ts",
     "dev": "npx nodemon src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -b"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,7 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.3",
+    "nodemon": "^2.0.15",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   }

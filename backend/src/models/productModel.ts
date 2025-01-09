@@ -1,48 +1,59 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../config/db";
-import { Category } from "./categoryModel";
-import { ProductCategory } from "./productCategoriesModel";
+import { CategoryModel } from "./categoryModel";
+import { ProductCategoryModel } from "./productCategoriesModel";
+import { FlagModel } from "./flagsModel";
+import { ProductFlagModel } from "./productFlagsModel";
+import { Product } from "@pcc/shared";
 
 // CREATE TABLE `products` (
 //   `id` varchar(255) NOT NULL,
 //   `name` varchar(255) NOT NULL,
-//   `href` varchar(255) NOT NULL,
-//   `price` decimal(10,2) NOT NULL,
-//   `discount` decimal(4,0) DEFAULT NULL,
-//   `seller` varchar(255) NOT NULL,
-//   `shadow_id` varchar(255) DEFAULT NULL,
-//   `offer_id` varchar(255) DEFAULT NULL,
-//   `brand` varchar(255) NOT NULL,
+//   `price` decimal(6,2) NOT NULL,
+//   `discount` tinyint unsigned DEFAULT NULL,
+//   `seller` varchar(64) NOT NULL,
+//   `shadow_id` int unsigned DEFAULT NULL,
+//   `offer_id` char(36) DEFAULT NULL,
+//   `brand` varchar(64) NOT NULL,
 //   `thumbnail` varchar(255) NOT NULL,
-//   `flags` varchar(255) DEFAULT NULL,
-//   `condition_status` varchar(255) DEFAULT NULL,
 //   PRIMARY KEY (`id`)
 // )
 
-export class Product extends Model {
+export class ProductModel extends Model implements Product {
   declare id: string;
   declare name: string;
-  declare href: string;
   declare price: number;
   declare discount: number;
   declare seller: string;
-  declare shadow_id: string;
+  declare shadow_id: number;
   declare offer_id: string;
   declare brand: string;
   declare thumbnail: string;
-  declare flags: string;
-  declare condition_status: string;
 
   public static associate() {
-    Product.belongsToMany(Category, {
-      through: ProductCategory,
+    ProductModel.belongsToMany(CategoryModel, {
+      through: ProductCategoryModel,
       foreignKey: "product_id",
       otherKey: "category_id",
+    });
+
+    ProductModel.hasMany(ProductCategoryModel, {
+      foreignKey: "product_id",
+    });
+
+    ProductModel.belongsToMany(FlagModel, {
+      through: ProductFlagModel,
+      foreignKey: "product_id",
+      otherKey: "flag_id",
+    });
+
+    ProductModel.hasMany(ProductFlagModel, {
+      foreignKey: "product_id",
     });
   }
 }
 
-Product.init(
+ProductModel.init(
   {
     id: {
       type: DataTypes.STRING,
@@ -52,45 +63,33 @@ Product.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    href: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     price: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(6, 2),
       allowNull: false,
     },
     discount: {
-      type: DataTypes.DECIMAL(4, 0),
+      type: DataTypes.TINYINT.UNSIGNED,
       allowNull: true,
     },
     seller: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(64),
       allowNull: false,
     },
     shadow_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: true,
     },
     offer_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.CHAR(36),
       allowNull: true,
     },
     brand: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(64),
       allowNull: false,
     },
     thumbnail: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    flags: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    condition_status: {
-      type: DataTypes.STRING,
-      allowNull: true,
     },
   },
   {
