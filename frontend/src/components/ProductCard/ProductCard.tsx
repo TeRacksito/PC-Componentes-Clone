@@ -1,10 +1,11 @@
+import { ProductWithFlags } from "@pcc/shared";
 import React, { useState } from "react";
 import { FaShop } from "react-icons/fa6";
-import PcLogo from "/pc-logo.svg";
 import { Link } from "react-router-dom";
-import { Product } from "@pcc/shared";
+import { FlagTag } from "./FlagTag";
+import PcLogo from "/pc-logo.svg";
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product }: { product: ProductWithFlags }) {
   const [transform, setTransform] = useState({
     translateX: 0,
     translateY: 0,
@@ -45,6 +46,10 @@ export function ProductCard({ product }: { product: Product }) {
       <Link to={`/${product.id}`} className="block">
         <div className="w-full flex items-center justify-center relative">
           
+          {product.flags.map((flag) => (
+            <FlagTag key={flag.id} flag={flag} />
+          ))}
+                    
           {product.discount != 0 ? (
             <span className="absolute top-0 left-0 bg-red-700 text-white text-xs font-bold rounded px-2 py-1 z-10">
               -{product.discount}%

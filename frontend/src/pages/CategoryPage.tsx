@@ -56,6 +56,8 @@ export function CategoryPage({
 
   if (!data || data.type !== "products") return <div>No products found</div>;
 
+  console.log(data);
+
   const {
     products: productsData,
     page: currentPage,
@@ -98,7 +100,7 @@ export function CategoryPage({
         </span>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-        {productsData.map((product: Product) => (
+        {productsData.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

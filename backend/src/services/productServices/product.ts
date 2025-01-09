@@ -74,7 +74,7 @@ export const getTotalProductsByCategorySlugFromDB = async (slug: string) => {
 
 export const getFeaturedProductsFromDB = async (targetLength: number = 6) => {
   let filter_categories: string[] = [];
-  let chosenProducts: Product[] = [];
+  let chosenProducts: ProductModel[] = [];
 
   for (let i = 0; i < targetLength; i++) {
     const chosen = await ProductModel.findOne({
