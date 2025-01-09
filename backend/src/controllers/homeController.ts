@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import { getFeaturedProductsFromDB } from "../services/productServices/product";
 import { getFeaturedCategoriesFromDB } from "../services/categoryServices/category";
 import { wrapSuccessResponse } from "./responseWrapper";
-import { LandPageContent } from "@pcc/shared";
+import { Category, LandPageContent } from "@pcc/shared";
 import { getProductsWithFlagsByProductsFromDB } from "../services/productServices/productWithFlags";
 
 export const getHome: RequestHandler = async (req, res, next) => {

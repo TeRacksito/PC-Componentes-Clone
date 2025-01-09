@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CategoryPage } from "./CategoryPage";
 import { ProductPage } from "./ProductPage";
-import { CategoryWithBreadcrumb } from "@pcc/shared";
+import { CategoryWithBreadcrumb, ProductWithFlags } from "@pcc/shared";
 
 export function DynamicPage() {
   const { slug } = useParams();
@@ -35,7 +35,8 @@ export function DynamicPage() {
   if (error) return <div>{error}</div>;  
 
   if (data?.type === "product") {
-    return <ProductPage product={data.data} />;
+    const productWithFlags = data?.data as ProductWithFlags;
+    return <ProductPage productWithFlags={productWithFlags} />;
   } else if (data?.type === "category") {
     const categoryWithBreadcrumb = data?.data as CategoryWithBreadcrumb;
     return <CategoryPage categoryWithBreadcrumb={categoryWithBreadcrumb} />;

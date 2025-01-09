@@ -1,6 +1,6 @@
-import { Product } from "@pcc/shared";
+import { Product, ProductWithFlags } from "@pcc/shared";
 import { ProductCard } from "../components/ProductCard/ProductCard";
 
-export function ProductPage({ product }: { product: Product }) {
-  return <ProductCard product={product} />;
+export function ProductPage({ productWithFlags }: { productWithFlags: ProductWithFlags }) {
+  return <ProductCard productWithFlags={productWithFlags} />;
 }

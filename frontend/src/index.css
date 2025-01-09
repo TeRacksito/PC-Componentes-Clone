@@ -3,3 +3,7 @@
 * {
   scrollbar-gutter: stable;
 }
+
+svg {
+  scrollbar-gutter: unset;
+}

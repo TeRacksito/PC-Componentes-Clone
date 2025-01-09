@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CategoryCard } from "../components/CategoryCard/CategoryCard";
 import { ProductCard } from "../components/ProductCard/ProductCard";
-import { Category, Product } from "@pcc/shared";
+import { Category, LandPageContent, Product } from "@pcc/shared";
 
 export function Home() {
   const [data, setData] = useState<any>(null);
@@ -34,6 +34,11 @@ export function Home() {
     return <div>Not found</div>;
   }
 
+  const { 
+    featuredProductsWithFlags,
+    featuredCategories,
+  } = data.data as LandPageContent;
+
   return (
     <div className="space-y-10">
       <section className="bg-orange-500 text-white py-10 rounded-md">
@@ -48,8 +53,8 @@ export function Home() {
       <section className="container mx-auto">
         <h2 className="text-2xl font-semibold mb-6">Productos Destacados</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {data.featuredProducts.map((product) => (
-            <ProductCard product={product} />
+          {featuredProductsWithFlags.map((productWithFlags) => (
+            <ProductCard productWithFlags={productWithFlags} />
           ))}
         </div>
       </section>
@@ -57,7 +62,7 @@ export function Home() {
       <section className="container mx-auto">
         <h2 className="text-2xl font-semibold mb-6">Categorías Destacadas</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {data.featuredCategories.map((category: Category) => (
+          {featuredCategories.map((category: Category) => (
             <CategoryCard category={category} />
           ))}
         </div>

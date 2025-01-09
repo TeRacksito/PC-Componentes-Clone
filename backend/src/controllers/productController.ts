@@ -17,10 +17,21 @@ export const getProductBySlug: RequestHandler = async (req, res, next) => {
     const { slug } = req.params;
     const product = await getProductModelBySlugFromDB(slug);
 
-    if (product) {
-      res.json(wrapSuccessResponse("product", product));
+    if (!product) {
+      next();
       return;
     }
+
+    const productWithFlags = await getProductsWithFlagsByProductsFromDB(product);
+
+    if (!productWithFlags) {
+      next();
+      return;
+    }
+
+    res.json(
+      wrapSuccessResponse("product", productWithFlags[0])
+    );
 
     next();
   } catch (error) {
