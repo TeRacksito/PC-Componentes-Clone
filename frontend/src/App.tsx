@@ -13,6 +13,6 @@ export function App() {
         <Route path="/" element={<Home />} />
         <Route path="/:slug" element={<DynamicPage />} />
       </Routes>
-    </FullLayout>
+    </FullLayout> 
   );
 }

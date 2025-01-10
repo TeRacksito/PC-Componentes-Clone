@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build --workspaces --if-present && npm run test --if-present && rm -rf dist && npm run lint && tsc -b",
+    "build": "npm run build --workspaces --if-present && npm run test --if-present && rm -rf dist && npm run lint --if-present && tsc -b",
     "clean-up": "rm -rf node_modules dist && npm run clean-up --workspaces --if-present"
   },
   "keywords": [],
