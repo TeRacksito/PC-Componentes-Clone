@@ -1,4 +1,4 @@
-import { Category, CategoryWithBreadcrumb } from "@pcc/shared";
+import { CategoryWithBreadcrumb } from "@pcc/shared";
 import React from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";

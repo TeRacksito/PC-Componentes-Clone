@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run build --workspaces --if-present && npm run test && rm -rf dist && npm run lint && tsc -b",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run build --workspaces --if-present && npm run test --if-present && rm -rf dist && npm run lint && tsc -b",
+    "clean-up": "rm -rf node_modules dist && npm run clean-up --workspaces --if-present"
   },
   "keywords": [],
   "author": "",

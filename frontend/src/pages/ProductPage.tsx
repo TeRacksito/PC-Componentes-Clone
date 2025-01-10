@@ -1,4 +1,4 @@
-import { Product, ProductWithFlags } from "@pcc/shared";
+import { ProductWithFlags } from "@pcc/shared";
 import { ProductCard } from "../components/ProductCard/ProductCard";
 
 export function ProductPage({ productWithFlags }: { productWithFlags: ProductWithFlags }) {

@@ -1,15 +1,13 @@
+import {
+  CategoryWithBreadcrumb,
+  PaginatedProducts
+} from "@pcc/shared";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Breadcrumb } from "../components/Breadcrumbs/Breadcrumbs";
 import { LinkButton } from "../components/Buttons/LinkButton";
-import { ProductCard } from "../components/ProductCard/ProductCard";
 import { PageNavigator } from "../components/Buttons/PageNavigator";
-import {
-  Category,
-  CategoryWithBreadcrumb,
-  PaginatedProducts,
-  Product,
-} from "@pcc/shared";
+import { ProductCard } from "../components/ProductCard/ProductCard";
 
 const TRANSLATE_ORDER_CRITERIA: { [key: string]: string } = {
   offer: "Oferta",

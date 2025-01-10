@@ -2,9 +2,8 @@ import { ProductWithFlags } from "@pcc/shared";
 import React, { useState } from "react";
 import { FaShop } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { FlagTag } from "./FlagTag";
-import PcLogo from "/pc-logo.svg";
 import { FlagTagContainer } from "./FlagTagContainer";
+import PcLogo from "/pc-logo.svg";
 
 export function ProductCard({
   productWithFlags,

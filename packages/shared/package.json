@@ -5,7 +5,8 @@
   "types": "index.ts",
   "private": true,
   "scripts": {
-    "build": "rm -rf dist && tsc index.ts --declaration --allowJs --outDir dist"
+    "build": "rm -rf dist && tsc index.ts --declaration --allowJs --outDir dist",
+    "clean-up": "rm -rf node_modules dist"
   },
   "dependencies": {
     "@pcc/shared": "file:"

@@ -96,7 +96,9 @@ export const getFeaturedProductsFromDB = async (targetLength: number = 6) => {
           model: FlagModel,
           attributes: [],
           where: {
-            id: "flag-pcrecommended",
+            id: {
+              [Op.in]: ["flag-pcrecommended", "flag-pcchoice", "flag-gift"],
+            },
           },
         },
       ],

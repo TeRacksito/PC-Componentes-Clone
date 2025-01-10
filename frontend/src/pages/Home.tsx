@@ -1,7 +1,7 @@
+import { Category, LandPageContent } from "@pcc/shared";
 import { useEffect, useState } from "react";
 import { CategoryCard } from "../components/CategoryCard/CategoryCard";
 import { ProductCard } from "../components/ProductCard/ProductCard";
-import { Category, LandPageContent, Product } from "@pcc/shared";
 
 export function Home() {
   const [data, setData] = useState<any>(null);
