@@ -7,7 +7,7 @@ export const errorHandler: ErrorRequestHandler = (err, _, res, __) => {
   const statusCode = err.status || 500;
   const errorResponse = wrapErrorResponse(
     err.message || "Internal Server Error",
-    process.env.NODE_ENV === "development" ? err.stack : undefined
+    process.env.NODE_ENV === "development" ? err.stack : undefined,
   );
 
   res.status(statusCode).json(errorResponse);

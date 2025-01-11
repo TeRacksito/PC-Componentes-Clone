@@ -31,9 +31,8 @@ export const getHome: RequestHandler = async (req, res, next) => {
         ? Number(req.query?.categories)
         : undefined;
 
-    const featuredCategories = await getFeaturedCategoriesFromDB(
-      requestedCategories
-    );
+    const featuredCategories =
+      await getFeaturedCategoriesFromDB(requestedCategories);
     if (!featuredCategories) {
       throw new Error("No featured categories found");
     }
@@ -42,7 +41,7 @@ export const getHome: RequestHandler = async (req, res, next) => {
       wrapSuccessResponse("home", {
         featuredProductsWithFlags,
         featuredCategories,
-      } as LandPageContent)
+      } as LandPageContent),
     );
   } catch (error) {
     next(error);

@@ -65,23 +65,23 @@ Main branch should be a functional version of the project, in terms of basic fea
 - **Docker Issues**: If you encounter any issues with Docker and port bindings, try the following:
 
   1. **Port Already in Use**: Check if the required ports (5011, 5012, 3306) are already in use.
-      ```cmd
-      netstat -aon | findstr "5011 5012 3306"
-      ```
-      Kill the processes using the ports (replace `PID` with the actual process ID).
-      ```cmd
-      taskkill /F /PID [PID]
-      ```
+     ```cmd
+     netstat -aon | findstr "5011 5012 3306"
+     ```
+     Kill the processes using the ports (replace `PID` with the actual process ID).
+     ```cmd
+     taskkill /F /PID [PID]
+     ```
   2. **Reset WinNAT**: Try resetting the WinNAT network using privileged PowerShell.
-      ```powershell
-      net stop winnat
-      net start winnat
-      ```
-      You can check the excluded port range of WinNAT, to make sure it was the issue.
-      ```powershell
-      netsh interface ipv4 show excludedportrange protocol=tcp
-      ```
-      _Of course, Windows making trouble with no reason..._
+     ```powershell
+     net stop winnat
+     net start winnat
+     ```
+     You can check the excluded port range of WinNAT, to make sure it was the issue.
+     ```powershell
+     netsh interface ipv4 show excludedPortRange protocol=tcp
+     ```
+     _Of course, Windows making trouble with no reason..._
 
 - **package-lock.json**: There shouldn't be package-lock files other that the root one. Because NPM is set up with workspaces, all packages goes to root lock file.
-   Having this in mind, the extension `Red Hat Dependency Analytics` with ID `redhat.fabric8-analytics` is not recommended for this project. As it creates a package-lock.json for every workspace. To remove it, you can disable the extension or remove it from the workspace settings.
+  Having this in mind, the extension `Red Hat Dependency Analytics` with ID `redhat.fabric8-analytics` is not recommended for this project. As it creates a package-lock.json for every workspace. To remove it, you can disable the extension or remove it from the workspace settings.

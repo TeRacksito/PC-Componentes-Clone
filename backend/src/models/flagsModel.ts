@@ -66,5 +66,5 @@ FlagModel.init(
     sequelize,
     tableName: "flags",
     timestamps: false,
-  }
+  },
 );

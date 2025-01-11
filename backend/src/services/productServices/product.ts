@@ -25,7 +25,7 @@ export const getProductsByCategorySlugFromDB = async (
   slug: string,
   orderCriteria: ORDER_CRITERIA_TYPE = DEFAULT_ORDER_CRITERIA,
   page: number = 1,
-  limit: number = 40
+  limit: number = 40,
 ) => {
   if (!ORDER_CRITERIA[orderCriteria]) {
     orderCriteria = DEFAULT_ORDER_CRITERIA;
@@ -124,7 +124,7 @@ export const getFeaturedProductsFromDB = async (targetLength: number = 6) => {
     });
 
     filter_categories = filter_categories.concat(
-      categories.map((category) => category.category_id)
+      categories.map((category) => category.category_id),
     );
   }
 
@@ -145,7 +145,7 @@ export const getProductsByInheritedCategoriesFromDB = async (
   category: CategoryModel,
   orderCriteria: ORDER_CRITERIA_TYPE = DEFAULT_ORDER_CRITERIA,
   page: number = 1,
-  limit: number = 40
+  limit: number = 40,
 ) => {
   if (!ORDER_CRITERIA[orderCriteria]) {
     orderCriteria = DEFAULT_ORDER_CRITERIA;
@@ -172,7 +172,7 @@ export const getProductsByInheritedCategoriesFromDB = async (
 };
 
 export const getTotalProductsByInheritedCategoriesFromDB = async (
-  category: CategoryModel
+  category: CategoryModel,
 ) => {
   const categoryTree = await getCategoryTreeFromDB(category);
 

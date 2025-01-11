@@ -16,8 +16,8 @@ export const getCategoryBySlug: RequestHandler = async (req, res, next) => {
     res.json(
       wrapSuccessResponse(
         "category",
-        await getCategoryWithBreadcrumbFromDB(category)
-      )
+        await getCategoryWithBreadcrumbFromDB(category),
+      ),
     );
     return;
   } catch (error) {

@@ -16,7 +16,7 @@ app.use((req, _, next) => {
   const error = new HttpError(
     "Not found",
     404,
-    new Error(`Cannot ${req.method} ${req.url}`)
+    new Error(`Cannot ${req.method} ${req.url}`),
   );
   next(error);
 });

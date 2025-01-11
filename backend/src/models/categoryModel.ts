@@ -60,5 +60,5 @@ CategoryModel.init(
     sequelize,
     tableName: "categories",
     timestamps: false,
-  }
+  },
 );

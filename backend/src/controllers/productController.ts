@@ -22,16 +22,15 @@ export const getProductBySlug: RequestHandler = async (req, res, next) => {
       return;
     }
 
-    const productWithFlags = await getProductsWithFlagsByProductsFromDB(product);
+    const productWithFlags =
+      await getProductsWithFlagsByProductsFromDB(product);
 
     if (!productWithFlags) {
       next();
       return;
     }
 
-    res.json(
-      wrapSuccessResponse("product", productWithFlags[0])
-    );
+    res.json(wrapSuccessResponse("product", productWithFlags[0]));
 
     next();
   } catch (error) {
@@ -43,7 +42,7 @@ const MAX_PRODUCTS_PER_PAGE = 20;
 export const getProductsByCategorySlug: RequestHandler = async (
   req,
   res,
-  next
+  next,
 ) => {
   try {
     const { slug } = req.params;
@@ -66,12 +65,11 @@ export const getProductsByCategorySlug: RequestHandler = async (
       return;
     }
 
-    const totalProducts = await getTotalProductsByInheritedCategoriesFromDB(
-      category
-    );
+    const totalProducts =
+      await getTotalProductsByInheritedCategoriesFromDB(category);
 
     const maxPages = Math.ceil(
-      (totalProducts || MAX_PRODUCTS_PER_PAGE) / MAX_PRODUCTS_PER_PAGE
+      (totalProducts || MAX_PRODUCTS_PER_PAGE) / MAX_PRODUCTS_PER_PAGE,
     );
 
     page = Math.min(page, maxPages);
@@ -80,7 +78,7 @@ export const getProductsByCategorySlug: RequestHandler = async (
       category,
       orderCriteria,
       page,
-      MAX_PRODUCTS_PER_PAGE
+      MAX_PRODUCTS_PER_PAGE,
     );
 
     if (!products) {
@@ -89,7 +87,7 @@ export const getProductsByCategorySlug: RequestHandler = async (
     }
 
     const productsWithFlags = await getProductsWithFlagsByProductsFromDB(
-      ...products
+      ...products,
     );
 
     if (!productsWithFlags) {
@@ -103,11 +101,11 @@ export const getProductsByCategorySlug: RequestHandler = async (
         maxPages,
         orderCriteria,
         availableOrderCriteria: Object.keys(
-          ORDER_CRITERIA
+          ORDER_CRITERIA,
         ) as ORDER_CRITERIA_TYPE[],
         totalProducts,
         products: productsWithFlags,
-      } as PaginatedProducts)
+      } as PaginatedProducts),
     );
 
     res.json({
@@ -116,7 +114,7 @@ export const getProductsByCategorySlug: RequestHandler = async (
       maxPages,
       orderCriteria,
       availableOrderCriteria: Object.keys(
-        ORDER_CRITERIA
+        ORDER_CRITERIA,
       ) as ORDER_CRITERIA_TYPE[],
       totalProducts,
       data: products,

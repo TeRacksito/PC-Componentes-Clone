@@ -10,7 +10,7 @@ export const getCategoryTreeFromDB = async (category: CategoryModel) => {
         ...child.get(),
         children: (await getCategoryTreeFromDB(child)).children,
       };
-    })
+    }),
   );
   return {
     ...category.get(),

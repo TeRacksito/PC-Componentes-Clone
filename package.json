@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run build --workspaces --if-present && npm run test --workspaces --if-present",
-    "clean-up": "rm -rf node_modules dist && npm run clean-up --workspaces --if-present"
+    "clean-up": "rm -rf node_modules dist && npm run clean-up --workspaces --if-present",
+    "prettier": "npm run prettier --workspaces --if-present",
+    "prettier:write": "npm run prettier:write --workspaces --if-present"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +19,8 @@
     "frontend",
     "backend",
     "packages/shared"
-  ]
+  ],
+  "devDependencies": {
+    "prettier": "3.4.2"
+  }
 }

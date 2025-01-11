@@ -22,6 +22,7 @@ export default tseslint.config(
       },
     },
     plugins: {
+      // @ts-ignore
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
       react,
@@ -31,6 +32,7 @@ export default tseslint.config(
         version: "18.3",
       },
     },
+    // @ts-ignore
     rules: {
       ...reactHooks.configs.recommended.rules,
       "react-refresh/only-export-components": [
@@ -40,5 +42,5 @@ export default tseslint.config(
       ...react.configs.recommended.rules,
       ...react.configs["jsx-runtime"].rules,
     },
-  }
+  },
 );

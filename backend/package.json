@@ -7,7 +7,9 @@
     "start": "ts-node src/server.ts",
     "dev": "npx nodemon src/server.ts",
     "build": "tsc -b",
-    "clean-up": "rm -rf node_modules dist"
+    "clean-up": "rm -rf node_modules dist",
+    "prettier": "npx prettier . --check",
+    "prettier:write": "npx prettier . --write"
   },
   "keywords": [],
   "author": "",

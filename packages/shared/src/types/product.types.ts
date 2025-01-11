@@ -21,6 +21,4 @@ export type PaginatedProducts = {
   products: ProductWithFlags[];
 };
 
-export type OrderCriteria = {
-  
-}
+export type OrderCriteria = {};

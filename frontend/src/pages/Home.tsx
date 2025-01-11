@@ -34,10 +34,8 @@ export function Home() {
     return <div>Not found</div>;
   }
 
-  const { 
-    featuredProductsWithFlags,
-    featuredCategories,
-  } = data.data as LandPageContent;
+  const { featuredProductsWithFlags, featuredCategories } =
+    data.data as LandPageContent;
 
   return (
     <div className="space-y-10">

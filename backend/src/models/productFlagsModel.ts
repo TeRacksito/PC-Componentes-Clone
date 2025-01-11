@@ -41,5 +41,5 @@ ProductFlagModel.init(
     sequelize,
     tableName: "product_flags",
     timestamps: false,
-  }
+  },
 );

@@ -17,7 +17,7 @@ export function ProductCard({
   });
 
   const handleMouseEnter = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - rect.left - rect.width / 2;

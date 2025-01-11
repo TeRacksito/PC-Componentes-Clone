@@ -42,5 +42,5 @@ ProductCategoryModel.init(
     sequelize,
     tableName: "products_categories",
     timestamps: false,
-  }
+  },
 );

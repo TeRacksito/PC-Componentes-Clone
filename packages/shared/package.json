@@ -6,7 +6,9 @@
   "private": true,
   "scripts": {
     "build": "rm -rf dist && tsc src/index.ts --declaration --allowJs --outDir dist",
-    "clean-up": "rm -rf node_modules dist"
+    "clean-up": "rm -rf node_modules dist",
+    "prettier": "npx prettier . --check",
+    "prettier:write": "npx prettier . --write"
   },
   "dependencies": {
     "@pcc/shared": "file:"

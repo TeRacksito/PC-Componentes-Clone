@@ -16,7 +16,9 @@ export const getCategoryBreadcrumbFromDB = async (category: CategoryModel) => {
   return breadcrumb.reverse();
 };
 
-export const getCategoryWithBreadcrumbFromDB = async (category: CategoryModel) => {
+export const getCategoryWithBreadcrumbFromDB = async (
+  category: CategoryModel,
+) => {
   return {
     ...category.get(),
     breadcrumb: await getCategoryBreadcrumbFromDB(category),

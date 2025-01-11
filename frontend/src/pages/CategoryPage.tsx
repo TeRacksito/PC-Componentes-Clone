@@ -1,7 +1,4 @@
-import {
-  CategoryWithBreadcrumb,
-  PaginatedProducts
-} from "@pcc/shared";
+import { CategoryWithBreadcrumb, PaginatedProducts } from "@pcc/shared";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Breadcrumb } from "../components/Breadcrumbs/Breadcrumbs";

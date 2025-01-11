@@ -6,6 +6,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "prettier": "npx prettier . --check",
+    "prettier:write": "npx prettier . --write",
     "preview": "vite preview",
     "clean-up": "rm -rf node_modules dist"
   },

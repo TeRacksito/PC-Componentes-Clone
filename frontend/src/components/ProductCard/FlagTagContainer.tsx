@@ -9,4 +9,4 @@ export const FlagTagContainer = ({ flags }: { flags: Flag[] }) => {
       ))}
     </div>
   );
-}
+};
