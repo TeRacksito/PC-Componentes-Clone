@@ -1,6 +1,6 @@
-import { Category, CategoryWithBreadcrumb } from "@pcc/shared";
-import { getCategoryParentFromDB } from "./category";
+import { CategoryWithBreadcrumb } from "@pcc/shared";
 import { CategoryModel } from "../../models";
+import { getCategoryParentFromDB } from "./category";
 
 export const getCategoryBreadcrumbFromDB = async (category: CategoryModel) => {
   const breadcrumb: CategoryWithBreadcrumb[] = [];

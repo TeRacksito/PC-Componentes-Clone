@@ -1,6 +1,5 @@
+import { CategoryTree } from "@pcc/shared";
 import { Op, Order, Sequelize } from "sequelize";
-import { getCategoryTreeFromDB } from "../categoryServices/categoryTree";
-import { Category, CategoryTree, Product } from "@pcc/shared";
 import {
   CategoryModel,
   FlagModel,
@@ -8,6 +7,7 @@ import {
   ProductModel,
 } from "../../models";
 import { getCategoryModelBySlugFromDB } from "../categoryServices/category";
+import { getCategoryTreeFromDB } from "../categoryServices/categoryTree";
 
 export const getProductModelBySlugFromDB = async (slug: string) => {
   return await ProductModel.findOne({ where: { id: slug } });

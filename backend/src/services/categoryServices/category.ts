@@ -1,6 +1,5 @@
 import { Sequelize } from "sequelize";
 import { CategoryModel } from "../../models";
-import { Category } from "@pcc/shared";
 
 export const getCategoryModelBySlugFromDB = async (slug: string) => {
   return await CategoryModel.findOne({ where: { id: slug } });

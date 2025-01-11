@@ -1,6 +1,6 @@
-import { Category, CategoryTree } from "@pcc/shared";
-import { getCategoryChildrenFromDB } from "./category";
+import { CategoryTree } from "@pcc/shared";
 import { CategoryModel } from "../../models";
+import { getCategoryChildrenFromDB } from "./category";
 
 export const getCategoryTreeFromDB = async (category: CategoryModel) => {
   const children = await getCategoryChildrenFromDB(category);

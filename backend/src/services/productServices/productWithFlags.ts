@@ -1,6 +1,6 @@
-import { Product, ProductWithFlags } from "@pcc/shared";
-import { FlagModel } from "../../models/flagsModel";
+import { ProductWithFlags } from "@pcc/shared";
 import { ProductModel } from "../../models";
+import { FlagModel } from "../../models/flagsModel";
 
 export const getProductsWithFlagsByProductsFromDB = async (
   ...products: ProductModel[]

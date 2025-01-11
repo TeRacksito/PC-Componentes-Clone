@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/", dynamicRouter);
 
-app.use((req, res, next) => {
+app.use((req, _, next) => {
   const error = new HttpError(
     "Not found",
     404,

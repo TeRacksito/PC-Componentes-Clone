@@ -6,7 +6,6 @@
   "scripts": {
     "start": "ts-node src/server.ts",
     "dev": "npx nodemon src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -b",
     "clean-up": "rm -rf node_modules dist"
   },

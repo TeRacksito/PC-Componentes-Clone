@@ -1,9 +1,9 @@
+import { LandPageContent } from "@pcc/shared";
 import { RequestHandler } from "express";
-import { getFeaturedProductsFromDB } from "../services/productServices/product";
 import { getFeaturedCategoriesFromDB } from "../services/categoryServices/category";
-import { wrapSuccessResponse } from "./responseWrapper";
-import { Category, LandPageContent } from "@pcc/shared";
+import { getFeaturedProductsFromDB } from "../services/productServices/product";
 import { getProductsWithFlagsByProductsFromDB } from "../services/productServices/productWithFlags";
+import { wrapSuccessResponse } from "./responseWrapper";
 
 export const getHome: RequestHandler = async (req, res, next) => {
   try {

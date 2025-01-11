@@ -2,13 +2,18 @@
   "name": "@pcc/shared",
   "version": "1.0.0",
   "module": "dist/index.js",
-  "types": "index.ts",
+  "types": "src/index.ts",
   "private": true,
   "scripts": {
-    "build": "rm -rf dist && tsc index.ts --declaration --allowJs --outDir dist",
+    "build": "rm -rf dist && tsc src/index.ts --declaration --allowJs --outDir dist",
     "clean-up": "rm -rf node_modules dist"
   },
   "dependencies": {
     "@pcc/shared": "file:"
+  },
+  "devDependencies": {
+    "ts-node": "10.9.2",
+    "typescript": "5.7.2",
+    "@types/node": "22.10.5"
   }
 }
