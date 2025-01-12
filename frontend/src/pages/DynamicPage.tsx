@@ -12,7 +12,7 @@ export function DynamicPage() {
 
   useEffect(() => {
     const fetchData = () => {
-      fetch(`http://localhost:5011/${slug}`)
+      fetch(`http://localhost:5011/api/${slug}`)
         .then((response) => response.json())
         .then((data) => {
           setData(data);

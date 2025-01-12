@@ -1,0 +1,14 @@
+FROM node:20
+
+WORKDIR /usr/src/app
+
+COPY packages ./packages
+COPY backend ./backend
+COPY package*.json .
+COPY wait-for-it.sh /usr/local/bin/wait-for-it
+RUN npm install
+
+WORKDIR /usr/src/app/backend
+
+RUN npm run build
+CMD [ "wait-for-it", "db:3306", "--", "npm", "run", "start" ]

@@ -5,14 +5,19 @@ import { FullLayout } from "./components/Layouts/fullLayout";
 // import "./App.css";
 import { Home } from "./pages/Home";
 import { DynamicPage } from "./pages/DynamicPage";
+import { LoginPage } from "./pages/LoginPage";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export function App() {
   return (
-    <FullLayout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/:slug" element={<DynamicPage />} />
-      </Routes>
-    </FullLayout>
+    <AuthProvider>
+      <FullLayout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/:slug" element={<DynamicPage />} />
+        </Routes>
+      </FullLayout>
+    </AuthProvider>
   );
 }

@@ -1,0 +1,36 @@
+services:
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db-init:/docker-entrypoint-initdb.d
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/DockerfileDeploy
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: root
+      DB_NAME: pc_clone_db
+      NODE_ENV: production
+      PORT: 5011
+    ports:
+      - "5011:5011"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/DockerfileDeploy
+    volumes:
+      - ./frontend:/app/frontend/dist
+
+volumes:
+  db_data:

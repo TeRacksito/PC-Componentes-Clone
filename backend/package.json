@@ -2,9 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "ts-node src/server.ts",
+    "start": "node dist/server.js",
     "dev": "npx nodemon src/server.ts",
     "build": "tsc -b",
     "clean-up": "rm -rf node_modules dist",
@@ -16,17 +16,32 @@
   "license": "ISC",
   "dependencies": {
     "backend": "file:",
+    "bcryptjs": "2.4.3",
+    "connect-redis": "8.0.1",
+    "cookie-parser": "1.4.7",
     "cors": "2.8.5",
+    "crypto-ts": "1.0.2",
     "express": "4.21.2",
+    "express-session": "1.18.1",
+    "jsonwebtoken": "9.0.2",
     "mysql2": "3.12.0",
+    "redis": "4.7.0",
     "sequelize": "6.37.5"
   },
   "devDependencies": {
+    "@types/bcryptjs": "2.4.6",
+    "@types/cookie-parser": "1.4.8",
     "@types/cors": "2.8.17",
     "@types/express": "5.0.0",
+    "@types/express-session": "1.18.1",
+    "@types/jsonwebtoken": "9.0.7",
     "@types/node": "22.10.5",
     "nodemon": "3.1.9",
     "ts-node": "10.9.2"
-    
+  },
+  "paths": {
+    "@src/*": [
+      "src/*"
+    ]
   }
 }

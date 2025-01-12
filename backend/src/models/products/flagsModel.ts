@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../config/db";
+import { sequelize } from "../../config/db";
 import { ProductFlagModel } from "./productFlagsModel";
 import { ProductModel } from "./productModel";
 import { Flag } from "@pcc/shared";

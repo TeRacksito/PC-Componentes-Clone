@@ -115,8 +115,6 @@ export const getFeaturedProductsFromDB = async (targetLength: number = 6) => {
 
     chosenProducts.push(chosen);
 
-    console.log(chosen);
-
     const categories = await ProductCategoryModel.findAll({
       where: {
         product_id: chosen.id,

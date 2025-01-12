@@ -1,6 +1,5 @@
 import { ProductWithFlags } from "@pcc/shared";
-import { ProductModel } from "../../models";
-import { FlagModel } from "../../models/flagsModel";
+import { FlagModel, ProductModel } from "../../models";
 
 export const getProductsWithFlagsByProductsFromDB = async (
   ...products: ProductModel[]
@@ -18,7 +17,7 @@ export const getProductsWithFlagsByProductsFromDB = async (
       ],
     });
     productsWithFlags.push({
-      ...product.get(),
+      ...product.get({ plain: true }),
       flags,
     });
   }

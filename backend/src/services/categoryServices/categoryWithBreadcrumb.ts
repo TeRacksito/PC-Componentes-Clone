@@ -20,7 +20,7 @@ export const getCategoryWithBreadcrumbFromDB = async (
   category: CategoryModel,
 ) => {
   return {
-    ...category.get(),
+    ...category.get({ plain: true }),
     breadcrumb: await getCategoryBreadcrumbFromDB(category),
   } as CategoryWithBreadcrumb;
 };

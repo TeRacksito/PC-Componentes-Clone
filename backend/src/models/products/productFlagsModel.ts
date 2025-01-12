@@ -1,7 +1,7 @@
 import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../config/db";
 import { ProductModel } from "./productModel";
 import { FlagModel } from "./flagsModel";
+import { sequelize } from "../../config/db";
 
 // CREATE TABLE `product_flags` (
 //   `product_id` varchar(255) NOT NULL,

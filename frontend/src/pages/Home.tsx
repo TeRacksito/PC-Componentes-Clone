@@ -1,7 +1,7 @@
 import { Category, LandPageContent } from "@pcc/shared";
 import { useEffect, useState } from "react";
 import { CategoryCard } from "../components/CategoryCard/CategoryCard";
-import { ProductCard } from "../components/ProductCard/ProductCard";
+import { ProductCard } from "../components/Product/ProductCard";
 
 export function Home() {
   const [data, setData] = useState<any>(null);
@@ -10,7 +10,7 @@ export function Home() {
 
   useEffect(() => {
     const fetchData = () => {
-      fetch("http://localhost:5011/?products=8&categories=4")
+      fetch("http://localhost:5011/api?products=8&categories=4")
         .then((response) => response.json())
         .then((data) => {
           setData(data);
@@ -52,7 +52,10 @@ export function Home() {
         <h2 className="text-2xl font-semibold mb-6">Productos Destacados</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {featuredProductsWithFlags.map((productWithFlags) => (
-            <ProductCard productWithFlags={productWithFlags} />
+            <ProductCard
+              key={productWithFlags.id}
+              productWithFlags={productWithFlags}
+            />
           ))}
         </div>
       </section>
@@ -61,7 +64,7 @@ export function Home() {
         <h2 className="text-2xl font-semibold mb-6">Categorías Destacadas</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {featuredCategories.map((category: Category) => (
-            <CategoryCard category={category} />
+            <CategoryCard key={category.id} category={category} />
           ))}
         </div>
       </section>

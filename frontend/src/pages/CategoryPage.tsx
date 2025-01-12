@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { Breadcrumb } from "../components/Breadcrumbs/Breadcrumbs";
 import { LinkButton } from "../components/Buttons/LinkButton";
 import { PageNavigator } from "../components/Buttons/PageNavigator";
-import { ProductCard } from "../components/ProductCard/ProductCard";
+import { ProductCard } from "../components/Product/ProductCard";
 
 const TRANSLATE_ORDER_CRITERIA: { [key: string]: string } = {
   offer: "Oferta",
@@ -25,7 +25,7 @@ export function CategoryPage({
 
   useEffect(() => {
     const fetchData = () => {
-      const url = `http://localhost:5011/${
+      const url = `http://localhost:5011/api/${
         categoryWithBreadcrumb.id
       }/products/${window.location.pathname.split("/")[3] + location.search}`;
 
@@ -50,8 +50,6 @@ export function CategoryPage({
   if (error) return <div>{error}</div>;
 
   if (!data || data.type !== "products") return <div>No products found</div>;
-
-  console.log(data);
 
   const {
     products: productsData,

@@ -1,10 +1,10 @@
 import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../config/db";
-import { CategoryModel } from "./categoryModel";
+import { sequelize } from "../../config/db";
 import { ProductCategoryModel } from "./productCategoriesModel";
 import { FlagModel } from "./flagsModel";
 import { ProductFlagModel } from "./productFlagsModel";
 import { Product } from "@pcc/shared";
+import { CategoryModel } from "../categories/categoryModel";
 
 // CREATE TABLE `products` (
 //   `id` varchar(255) NOT NULL,

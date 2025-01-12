@@ -2,8 +2,9 @@ import { useState } from "react";
 import { FaBars, FaShoppingCart, FaTimes, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { LateralMenu } from "./LateralMenu";
-
 import PcLogo from "/pc-logo.svg";
+import { SemiPrivateRoute } from "../Routes/SemiPrivateRoute";
+import { UserIcon } from "../Icons/UserIcon";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,17 +38,32 @@ export function Header() {
           />
         </div>
 
-        <div className="flex items-center space-x-4">
-          <Link
-            to="/account"
-            className="flex items-center space-x-4 px-4 py-2 rounded-sm hover:bg-gray-100 transition-colors duration-200 gap-2"
-          >
-            <FaUser size={20} />
-          </Link>
+        <div className="flex items-center md:gap-4">
+          <SemiPrivateRoute
+            privateChildren={
+              <Link
+                to="/account"
+                className="flex items-center space-x-4 px-4 py-2 shrink-0 rounded-sm hover:bg-gray-100 transition-colors duration-200 gap-2"
+              >
+                <div className="relative">
+
+                <UserIcon />
+                </div>
+              </Link>
+            }
+            publicChildren={
+              <Link
+                to="/login"
+                className="flex items-center space-x-4 px-4 py-2 rounded-sm hover:bg-gray-100 transition-colors duration-200 gap-2"
+              >
+                <FaUser size={20} />
+              </Link>
+            }
+          />
 
           <Link
             to="/cart"
-            className="flex items-center space-x-4 px-4 py-2 rounded-sm hover:bg-gray-100 transition-colors duration-200 gap-2"
+            className="flex items-center px-4 py-2 rounded-sm hover:bg-gray-100 transition-colors duration-200 gap-3"
           >
             <div className="relative">
               <FaShoppingCart size={20} />

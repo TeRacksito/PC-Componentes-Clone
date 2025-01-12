@@ -2,7 +2,7 @@ import {
   ErrorResponse,
   ResponseData,
   SuccessResponse,
-} from "../types/response.types";
+} from "../@types/response.types";
 
 export function wrapSuccessResponse(
   type: string,

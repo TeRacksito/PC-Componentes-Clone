@@ -4,10 +4,10 @@ export type Product = {
   id: string;
   name: string;
   price: number;
-  discount?: number;
+  discount: number;
   seller: string;
-  shadow_id?: number;
-  offer_id?: string;
+  shadow_id: number;
+  offer_id: string;
   brand: string;
   thumbnail: string;
 };

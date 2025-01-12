@@ -7,13 +7,13 @@ export const getCategoryTreeFromDB = async (category: CategoryModel) => {
   const childrenWithTree: CategoryTree[] = await Promise.all(
     children.map(async (child) => {
       return {
-        ...child.get(),
+        ...child.get({ plain: true }),
         children: (await getCategoryTreeFromDB(child)).children,
       };
     }),
   );
   return {
-    ...category.get(),
+    ...category.get({ plain: true }),
     children: childrenWithTree,
   } as CategoryTree;
 };

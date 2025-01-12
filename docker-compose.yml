@@ -55,6 +55,8 @@ services:
           target: /usr/src/app/packages
           ignore:
             - node_modules
+    depends_on:
+      - backend
 
 volumes:
   db_data:
