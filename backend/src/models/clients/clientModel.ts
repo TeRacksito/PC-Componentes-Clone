@@ -1,7 +1,7 @@
 import { Client } from "@pcc/shared";
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../config/db";
-import { ClientPassModel } from "./clientPassModel";
+import { ClientPassModel, ClientProductModel, ProductModel } from "..";
 
 export class ClientModel extends Model implements Client {
   declare id: string;
@@ -14,6 +14,16 @@ export class ClientModel extends Model implements Client {
     ClientModel.hasOne(ClientPassModel, {
       sourceKey: "id",
       foreignKey: "id",
+    });
+
+    ClientModel.belongsToMany(ProductModel, {
+      through: "clients_products",
+      foreignKey: "client_id",
+      otherKey: "product_id",
+    });
+
+    ClientModel.hasMany(ClientProductModel, {
+      foreignKey: "client_id",
     });
   }
 }

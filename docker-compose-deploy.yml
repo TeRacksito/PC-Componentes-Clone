@@ -8,6 +8,13 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./db-init:/docker-entrypoint-initdb.d
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
 
   backend:
     build:
@@ -34,3 +41,4 @@ services:
 
 volumes:
   db_data:
+  redis_data:

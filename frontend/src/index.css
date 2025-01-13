@@ -4,6 +4,10 @@
   scrollbar-gutter: stable;
 }
 
+:root * {
+  scrollbar-gutter: inherit;
+}
+
 svg {
   scrollbar-gutter: unset;
 }

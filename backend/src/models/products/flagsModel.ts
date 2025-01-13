@@ -1,8 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../../config/db";
-import { ProductFlagModel } from "./productFlagsModel";
-import { ProductModel } from "./productModel";
 import { Flag } from "@pcc/shared";
+import { ProductFlagModel, ProductModel } from "..";
 
 // CREATE TABLE `flags` (
 //   `id` varchar(25) NOT NULL,

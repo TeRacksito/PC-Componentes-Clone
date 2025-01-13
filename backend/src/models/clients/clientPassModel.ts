@@ -1,7 +1,7 @@
 import { hash } from "bcryptjs";
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../config/db";
-import { ClientModel } from "./clientModel";
+import { ClientModel } from "..";
 
 export class ClientPassModel extends Model {
   declare id: string;

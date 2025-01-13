@@ -8,3 +8,9 @@ declare module "express-serve-static-core" {
     client?: ClientSignature;
   }
 }
+
+declare module "express-session" {
+  interface SessionData {
+    cart?: { product_id: string; quantity: number }[];
+  }
+}

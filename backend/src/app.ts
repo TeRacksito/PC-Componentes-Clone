@@ -10,6 +10,7 @@ import { clientRoutes } from "./routers/clientRoutes";
 import { dynamicRouter } from "./routers/dynamicRouter";
 import { createClient } from "redis";
 import { RedisStore } from "connect-redis";
+import { cartRoutes } from "./routers/cartRoutes";
 
 // Secrets creation
 process.env.JWT_SECRET = randomBytes(64).toString("hex");
@@ -17,7 +18,15 @@ process.env.SESSION_SECRET = randomBytes(64).toString("hex");
 
 const app = express();
 
-const redisClient = createClient();
+const redisClient = createClient({
+  url: process.env.REDIS_URL,
+});
+
+redisClient.on("error", (err) => {
+  console.error("Redis client error:", err);
+});
+
+redisClient.connect().catch(console.error);
 
 const corsOptions = {
   origin: "http://localhost:5012",
@@ -38,6 +47,14 @@ app.use(
   }),
 );
 
+app.use((req, _, next) => {
+  if (req.body && req.body._method) {
+    req.method = req.body._method.toUpperCase();
+  }
+  next();
+});
+
+app.use("/api/cart", cartRoutes);
 app.use("/api/client", clientRoutes);
 app.use("/api", dynamicRouter);
 

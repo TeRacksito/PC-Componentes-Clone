@@ -8,6 +8,7 @@ import {
 } from "../services/clientService/client";
 import { getClientPasswordByIdFromDB } from "../services/clientService/clientPass";
 import { ClientSignature } from "../@types/clientSignature.types";
+import { addProductToClient } from "../services/clientService/clientsProducts";
 
 export const authClientByCredentials: RequestHandler = async (
   req,
@@ -52,7 +53,14 @@ export const authClientByCredentials: RequestHandler = async (
       secure: false,
     });
 
-    console.log(client.get({ plain: true }));
+    if (req.session.cart) {
+      await addProductToClient(
+        ...req.session.cart.map((product) => ({
+          ...product,
+          client_id: client.id,
+        })),
+      );
+    }
 
     res.status(200).json({
       client: client.get({ plain: true }),

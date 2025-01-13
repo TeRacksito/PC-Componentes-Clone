@@ -1,12 +1,15 @@
 {
   "editor.tabSize": 2,
   "cSpell.words": [
+    "appendonly",
     "findstr",
     "initdb",
+    "mysql",
     "netsh",
     "nodenext",
     "pcrecommended",
     "redhat",
+    "redis",
     "resave",
     "tailwindcss",
     "taskkill",

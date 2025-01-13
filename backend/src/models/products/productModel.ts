@@ -1,10 +1,14 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../../config/db";
-import { ProductCategoryModel } from "./productCategoriesModel";
-import { FlagModel } from "./flagsModel";
-import { ProductFlagModel } from "./productFlagsModel";
 import { Product } from "@pcc/shared";
-import { CategoryModel } from "../categories/categoryModel";
+import {
+  CategoryModel,
+  ClientModel,
+  ClientProductModel,
+  FlagModel,
+  ProductCategoryModel,
+  ProductFlagModel,
+} from "..";
 
 // CREATE TABLE `products` (
 //   `id` varchar(255) NOT NULL,
@@ -48,6 +52,16 @@ export class ProductModel extends Model implements Product {
     });
 
     ProductModel.hasMany(ProductFlagModel, {
+      foreignKey: "product_id",
+    });
+
+    ProductModel.belongsToMany(ClientModel, {
+      through: "clients_products",
+      foreignKey: "product_id",
+      otherKey: "client_id",
+    });
+
+    ProductModel.hasMany(ClientProductModel, {
       foreignKey: "product_id",
     });
   }

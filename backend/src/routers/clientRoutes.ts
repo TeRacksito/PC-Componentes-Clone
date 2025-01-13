@@ -5,10 +5,10 @@ import {
 } from "../controllers/clientController";
 import {
   validateAuthCredentials,
-  validateAuthToken,
+  validateAuthTokenForce,
 } from "../middlewares/validators/clientValidator";
 
 export const clientRoutes = express.Router();
 
-clientRoutes.get("/", validateAuthToken, authClientById);
-clientRoutes.post("/auth", validateAuthCredentials, authClientByCredentials);
+clientRoutes.get("/", validateAuthTokenForce, authClientById);
+clientRoutes.post("/", validateAuthCredentials, authClientByCredentials);

@@ -9,6 +9,14 @@ services:
       - db_data:/var/lib/mysql
       - ./db-init:/docker-entrypoint-initdb.d
 
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+
   backend:
     build:
       context: .
@@ -20,6 +28,7 @@ services:
       DB_NAME: pc_clone_db
       NODE_ENV: development
       PORT: 5011
+      REDIS_URL: redis://redis:6379
     ports:
       - "5011:5011"
     develop:
@@ -60,3 +69,4 @@ services:
 
 volumes:
   db_data:
+  redis_data:

@@ -1,15 +1,16 @@
 interface ProductPriceAsideProps {
   price: number;
   discount: number;
+  children?: React.ReactNode;
 }
 
 export const ProductPriceAside: React.FC<ProductPriceAsideProps> = ({
   price,
   discount,
+  children,
 }) => {
   return (
-    <div className="mt-4">
-      <h2 className="text-2xl font-semibold">Price</h2>
+    <div className="mt-4 lg:border border-gray-300 lg:p-4 rounded-lg">
       <p className="mt-2 text-gray-600 flex items-center">
         <span className="text-4xl text-red-700 font-bold mr-4">
           {Number(price).toFixed(0)}
@@ -34,6 +35,7 @@ export const ProductPriceAside: React.FC<ProductPriceAsideProps> = ({
           </span>
         ) : null}
       </p>
+      {children ? children : null}
     </div>
   );
 };

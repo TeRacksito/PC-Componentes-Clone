@@ -30,8 +30,25 @@ export const validateAuthCredentials: RequestHandler = (req, _, next) => {
 
 export const validateAuthToken: RequestHandler = async (req, _, next) => {
   try {
-    const token = req.cookies.token; 
-    
+    const token = req.cookies.token;
+    try {
+      const decoded = verify(token, process.env.JWT_SECRET as string);
+
+      req.client = decoded as ClientSignature; 
+      next();
+    } catch (error) {
+      req.client = undefined;   
+      next();
+    }
+  } catch (error: any) {
+    next(new HttpError("Invalid token", 401, error));
+  }
+};
+
+export const validateAuthTokenForce: RequestHandler = async (req, _, next) => {
+  try {
+    const token = req.cookies.token;
+
     if (!token) {
       throw new HttpError("Not authenticated", 401);
     }

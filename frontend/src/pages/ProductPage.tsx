@@ -4,49 +4,96 @@ import { ProductDetails } from "../components/Product/ProductDetails";
 import { ProductPriceAside } from "../components/Product/ProductPriceAside";
 import { ProductDescription } from "../components/Product/ProductDescription";
 import { ProductComments } from "../components/Product/ProductComments";
+import { useRef, useState, useEffect } from "react";
+import { addToCart } from "../services/cartService";
+import {
+  StatusAlert,
+  StatusAlertHandles,
+} from "../components/Alerts/StatusAlert";
 
 export function ProductPage({
   productWithFlags,
 }: {
   productWithFlags: ProductWithFlags;
 }) {
+  const bottomRef = useRef(null);
+  const [isBottomVisible, setIsBottomVisible] = useState(false);
+  const alertRef = useRef<StatusAlertHandles>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsBottomVisible(entry.isIntersecting);
+      },
+      {
+        root: null,
+        threshold: 1,
+      },
+    );
+
+    if (bottomRef.current) {
+      observer.observe(bottomRef.current);
+    }
+  }, []);
+
+  const handleClientAddToCart = async () => {
+    try {
+      await addToCart(productWithFlags.id);
+
+      alertRef.current?.showAlert("success", "Producto añadido al carrito");
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+      alertRef.current?.showAlert(
+        "error",
+        "Error añadiendo producto al carrito",
+      );
+    }
+  };
   return (
     <div className="container mx-auto p-6">
-      {/* First Section: Product and Price/Buy */}
+      <StatusAlert ref={alertRef} />
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Product Section */}
-        {/* <div className="lg:col-span-3"> */}
         <ProductImageCarousel
           images={[
+            productWithFlags.thumbnail,
             "https://placehold.co/600x400",
             "https://placehold.co/600x500",
           ]}
         />{" "}
-        {/* Image carousel component */}
         <ProductDetails productWithFlags={productWithFlags} />{" "}
-        {/* Product details component */}
-        {/* </div> */}
-        {/* Price and Buy Section */}
-        {/* <div className="lg:col-span-1"> */}
         <ProductPriceAside
           price={productWithFlags.price}
           discount={productWithFlags.discount}
+          children={
+            <button
+              onClick={handleClientAddToCart}
+              className="hidden lg:block mt-4 bg-orange-500 text-white py-2 px-4 rounded cursor-pointer w-full"
+            >
+              Añadir al carrito
+            </button>
+          }
         />{" "}
-        {/* Price and buy aside component */}
-        {/* </div> */}
       </div>
 
-      {/* Second Section: Description */}
       <div className="mt-10">
         <ProductDescription description={"Description"} />{" "}
-        {/* Description component */}
       </div>
 
-      {/* Third Section: Comments */}
-      <div className="mt-10">
+      <div className="mt-10" ref={bottomRef}>
         <ProductComments productWithFlags={productWithFlags} />{" "}
-        {/* Comments component */}
       </div>
+
+      {!isBottomVisible && (
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 rounded w-full z-200 p-4">
+          <button
+            onClick={handleClientAddToCart}
+            className="bg-orange-500 text-white py-2 px-4 rounded cursor-pointer w-full z-200"
+          >
+            Añadir al carrito
+          </button>
+        </div>
+      )}
     </div>
   );
 }
