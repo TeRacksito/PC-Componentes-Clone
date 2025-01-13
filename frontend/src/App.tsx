@@ -10,6 +10,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
 import { CartPage } from "./pages/CartPage";
 import { AccountPage } from "./pages/AccountPage";
+import { PrivateRoute } from "./components/Routes/PrivateRoute";
 
 export function App() {
   return (
@@ -20,7 +21,9 @@ export function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/cart" element={<CartPage />} />
-            <Route path="/account" element={<AccountPage />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/account" element={<AccountPage />} />
+            </Route>
             <Route path="/:slug" element={<DynamicPage />} />
           </Routes>
         </FullLayout>

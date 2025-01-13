@@ -50,7 +50,7 @@
 - [/] Implement header with logo, search bar, user account and cart icons.
   - [x] Implement logo home link.
   - [/] Implement search bar.
-  - [x] Implement user account link.
+  - [x] Implement user account link that changes to login or account page based on user authentication. And displays user custom icon.
   - [x] Implement cart link.
 - [ ] Improve side-slide menu for category navigation.
   - Make the menu slide in/out smoothly.

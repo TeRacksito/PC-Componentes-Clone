@@ -7,7 +7,7 @@ type PrivateRouteProps = {
   children?: React.ReactNode;
 };
 export const PrivateRoute: React.FC<PrivateRouteProps> = ({
-  redirectTo = "/",
+  redirectTo = "/login",
   children,
 }) => {
   const { auth } = useAuth();
