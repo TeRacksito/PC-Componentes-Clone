@@ -24,6 +24,7 @@ Main branch should be a functional version of the project, in terms of basic fea
 ### Prerequisites
 
 - Ensure you have the following software installed:
+  - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
   - [Docker](https://docs.docker.com/get-docker/)
   - [Docker Compose](https://docs.docker.com/compose/install/)
 
