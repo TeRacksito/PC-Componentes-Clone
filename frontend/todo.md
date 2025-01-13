@@ -25,15 +25,19 @@
 
 ### Product Page
 
-- [/] Create product page (currently shows product card only).
-- [ ] Implement full product page with detailed product information.
+- [/] Implement full product page with detailed product information.
+  - [x] Display image carousel.
+  - [x] Display product details.
+  - [x] Add to cart functionality.
+  - [/] Display product comments.
+  - [ ] Display product questions.
 
 ### User-Related Pages
 
-- [ ] Implement Login page.
+- [x] Implement Login page (test user -> username `test` password `test`).
 - [ ] Implement Sign-Up (Registration) page.
 - [ ] Implement User Account page.
-- [ ] Implement Cart page.
+- [x] Implement Cart page.
 
 ### Other Pages
 
@@ -43,6 +47,11 @@
 
 ## Header Component
 
+- [/] Implement header with logo, search bar, user account and cart icons.
+  - [x] Implement logo home link.
+  - [/] Implement search bar.
+  - [x] Implement user account link.
+  - [x] Implement cart link.
 - [ ] Improve side-slide menu for category navigation.
   - Make the menu slide in/out smoothly.
   - Display categories starting with root categories and loading their children recursively.
@@ -55,9 +64,16 @@
 
 ## Error Handling
 
-- [ ] Implement proper error handling and display in the frontend.
-  - Replace basic error strings with user-friendly error messages.
+- [/] Implement proper error handling and display in the frontend.
+  - [x] Create a status component to display error/success messages.
+  - [/] error handling for API requests.
+  - [x] error handling for form validation.
+  - [ ] error pages (404, 500, etc.).
+  - [/] Replace basic error strings with user-friendly error messages.
 
 ## Optimizations
 
 - [ ] Implement loading skeletons for better user experience during data fetching.
+
+## Overall ux/ui
+### 6.5/10

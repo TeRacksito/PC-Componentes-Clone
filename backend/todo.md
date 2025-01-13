@@ -5,6 +5,16 @@
 - [x] Set up backend structure with controllers, models, routers, services, middlewares, and config.
 - [x] Separate `app.ts` and `server.ts`.
 - [x] Set up Sequelize for database connection.
+  - [x] `CategoryModel` for categories.
+  - [x] `ProductModel` for products.
+  - [x] `ClientModel` for clients.
+  - [x] `ClientPassModel` for client passwords.
+  - [x] `ClientProductModel` for client products in cart.
+  - [x] `FlagModel` for products flags.
+  - [x] `ProductCategoryModel` for product categories.
+  - [x] `ClientProductModel` for client products.
+  - [x] `ProductFlagModel` for product flags.
+- [x] Set up associations between models.
 
 ## Endpoints and Routing
 
@@ -13,14 +23,24 @@
   - API handles parent categories by recursively collecting all child category products.
 - [ ] Implement endpoints to support filters by price, brand, and vendor on category products.
 - [ ] Implement endpoints for search queries by name.
-- [ ] Implement user authentication endpoints (Login, Sign-Up).
-- [ ] Implement cart-related endpoints.
+- [/] Implement client authentication endpoints (Login, Sign-Up).
+  - [x] Client login (test user -> username `test` password `test`).
+  - [ ] Client sign-up.
+  - [x] basic authentication with JWT.
+  - [x] password hashing and salting.
+  - [ ] password recovery.
+  - [ ] email verification.
+- [x] Implement cart-related endpoints.
 - [ ] Implement endpoints for posting reviews and questions.
-- [ ] Support full REST operations: GET (listing and individual), POST, PUT, DELETE for resources.
+- [x] Support full REST operations (CRUD):
+  - [x] GET. For listing all kinds of resources.
+  - [x] POST. For creating new resources.
+  - [x] PUT. For updating existing resources, like products in cart.
+  - [x] DELETE. For removing resources, like products from cart.
 
 ## Middleware
 
-- [ ] Improve and fix middlewares.
+- [/] Improve and fix middlewares.
   - Identify and resolve issues caused by dynamic routing.
 
 ## Utilities
@@ -31,7 +51,7 @@
 
 ## Types and Interfaces
 
-- [ ] Centralize types by creating a folder.
+- [x] Centralize types by creating a folder.
 
 ## Data Considerations
 
