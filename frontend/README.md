@@ -19,12 +19,6 @@ This project’s frontend is built with **React**, **TypeScript**, **Vite**, and
 - **Tailwind CSS** – Utility-first CSS framework for styling.
 - **React Router DOM** – Declarative navigation and routing.
 
-## Important Config Files
-
-- **package.json** – Manages scripts (dev, build, test) and project dependencies.
-- **vite.config.ts** – Configures the development server URL, plugins (React, Tailwind), and bundling.
-- **tsconfig.app.json** – TypeScript compilation settings for frontend code.
-
 ## Development
 
 1. Run `npm install` in the frontend directory to install dependencies.

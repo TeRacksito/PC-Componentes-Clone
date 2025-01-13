@@ -18,14 +18,7 @@ This project’s backend provides a Node.js and Express-based REST API and integ
 - **MySQL** – Relational database system.
 - **Sequelize** – ORM for database modeling and queries.
 - **TypeScript** – Ensures robust, statically typed structures.
-
-## Important Config Files
-
-- **package.json** – Manages backend scripts and dependencies.
-- **Dockerfile** – Builds an isolated image for deploying the backend.
-- **tsconfig.json** – Defines the TypeScript compilation settings.
-- **db.ts** – Configures Sequelize database connection details.
-- **docker-compose.yml** – Orchestrates container setup for MySQL, backend, and frontend.
+- **Redis** – In-memory data structure store, used as a database for sessions.
 
 ## Development
 
