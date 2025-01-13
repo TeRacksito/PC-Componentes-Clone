@@ -9,6 +9,7 @@ This project’s frontend is built with **React**, **TypeScript**, **Vite**, and
 - **components/** – Reusable presentational and logical components (Header, Footer, ProductCard, etc.).
 - **pages/** – Individual views or screens (Home, CategoryPage, ProductPage, etc.).
 - **hooks/** – Custom hooks for component logic reuse.
+- **services/** - Implement API communications.
 - **public/** – Static files and assets that Vite serves directly.
 - **types/** – TypeScript interfaces and types (Product, Category, etc.).
 
@@ -22,5 +23,5 @@ This project’s frontend is built with **React**, **TypeScript**, **Vite**, and
 ## Development
 
 1. Run `npm install` in the frontend directory to install dependencies.
-2. Use `docker compose watch` or `npm run dev` for local development with hot reloading.
+2. Use `docker compose watch` for local development with hot reloading.
 3. The frontend runs on [http://localhost:5012](http://localhost:5012) by default.
