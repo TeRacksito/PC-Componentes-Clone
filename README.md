@@ -2,6 +2,10 @@
 
 PC-Componentes-Clone is a full-stack project designed to replicate the functionalities of the popular e-commerce platform [PC Componentes](https://www.pccomponentes.com). The project leverages modern web technologies to create a robust, scalable, and maintainable architecture. It includes a React frontend, a Node.js backend, and a MySQL database, all orchestrated using Docker.
 
+## ToDo and README
+
+Read the ToDos and READMEs in root project, frontend and backend. There can be found an overall view of currently implementend features, and future plans.
+
 ## Main branch
 
 Main branch should be a functional version of the project, in terms of basic features and, more over, project structure. This means that the main branch should be always deployable and functional, no matter what development stage the project is.
