@@ -28,6 +28,9 @@ Main branch should be a functional version of the project, in terms of basic fea
   - [Docker](https://docs.docker.com/get-docker/)
   - [Docker Compose](https://docs.docker.com/compose/install/)
 
+  It's recommended to use Docker Desktop for inexperienced users of Docker
+  - [Docker Desktop](https://app.docker.com/signup)
+
 ### Setup Instructions
 
 1. **Clone the Repository**: Start by cloning the project repository to your local machine.
