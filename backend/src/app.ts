@@ -1,16 +1,14 @@
 /// <reference path="@types/all.d.ts" />
+import { RedisStore } from "connect-redis";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { randomBytes } from "crypto";
 import express from "express";
 import session from "express-session";
+import { createClient } from "redis";
 import { errorHandler } from "./middlewares/errorHandler";
 import { HttpError } from "./middlewares/HttpError";
-import { clientRoutes } from "./routers/clientRoutes";
-import { dynamicRouter } from "./routers/dynamicRouter";
-import { createClient } from "redis";
-import { RedisStore } from "connect-redis";
-import { cartRoutes } from "./routers/cartRoutes";
+import { rootRouter } from "./routers/rootRouter";
 
 // Secrets creation
 process.env.JWT_SECRET = randomBytes(64).toString("hex");
@@ -48,15 +46,14 @@ app.use(
 );
 
 app.use((req, _, next) => {
+  // under testing
   if (req.body && req.body._method) {
     req.method = req.body._method.toUpperCase();
   }
   next();
 });
 
-app.use("/api/cart", cartRoutes);
-app.use("/api/client", clientRoutes);
-app.use("/api", dynamicRouter);
+app.use("/api", rootRouter);
 
 app.use((req, _, next) => {
   const error = new HttpError(

@@ -5,9 +5,11 @@ import { LateralMenu } from "./LateralMenu";
 import PcLogo from "/pc-logo.svg";
 import { SemiPrivateRoute } from "../Routes/SemiPrivateRoute";
 import { UserIcon } from "../Icons/UserIcon";
+import { useCart } from "../../contexts/CartContext";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { count } = useCart();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -33,8 +35,10 @@ export function Header() {
         <div className="flex-grow sm:flex items-center space-x-2">
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="Buscar..."
             className="w-full px-3 py-2 text-black rounded-md"
+            onFocus={(e) => (e.target.placeholder = "Buscar... (Not implemented)")}
+            onBlur={(e) => (e.target.placeholder = "Buscar...")}
           />
         </div>
 
@@ -46,8 +50,7 @@ export function Header() {
                 className="flex items-center space-x-4 px-4 py-2 shrink-0 rounded-sm hover:bg-gray-100 transition-colors duration-200 gap-2"
               >
                 <div className="relative">
-
-                <UserIcon />
+                  <UserIcon />
                 </div>
               </Link>
             }
@@ -68,7 +71,7 @@ export function Header() {
             <div className="relative">
               <FaShoppingCart size={20} />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2">
-                3
+                {count}
               </span>
             </div>
             <div className="hidden md:block">Mi cesta</div>

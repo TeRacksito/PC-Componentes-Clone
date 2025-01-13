@@ -13,6 +13,9 @@ export const getProductModelBySlugFromDB = async (slug: string) => {
   return await ProductModel.findOne({ where: { id: slug } });
 };
 
+export const getProductModelByIdFromDB = async (id: string) =>
+  await getProductModelBySlugFromDB(id);
+
 export const ORDER_CRITERIA = {
   offer: [["discount", "DESC"]] as Order,
   priceDesc: [["price", "DESC"]] as Order,

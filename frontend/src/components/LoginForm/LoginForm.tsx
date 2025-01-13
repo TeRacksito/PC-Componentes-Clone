@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import FormInput from "./FormInput";
+import { useCart } from "../../contexts/CartContext";
 
 export const LoginForm: React.FC = () => {
   const { login } = useAuth();
@@ -9,12 +10,14 @@ export const LoginForm: React.FC = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { reloadCart } = useCart();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
       await login(email, password);
       navigate("/");
+      reloadCart();
     } catch (error) {
       setError("Login failed. Please check your credentials and try again.");
     }

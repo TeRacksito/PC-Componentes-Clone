@@ -10,6 +10,7 @@ import {
   StatusAlert,
   StatusAlertHandles,
 } from "../components/Alerts/StatusAlert";
+import { useCart } from "../contexts/CartContext";
 
 export function ProductPage({
   productWithFlags,
@@ -19,6 +20,7 @@ export function ProductPage({
   const bottomRef = useRef(null);
   const [isBottomVisible, setIsBottomVisible] = useState(false);
   const alertRef = useRef<StatusAlertHandles>(null);
+  const { setNewCount } = useCart();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -38,7 +40,8 @@ export function ProductPage({
 
   const handleClientAddToCart = async () => {
     try {
-      await addToCart(productWithFlags.id);
+      const newLength = await addToCart(productWithFlags.id);
+      setNewCount(newLength);
 
       alertRef.current?.showAlert("success", "Producto añadido al carrito");
     } catch (error) {

@@ -1,3 +1,5 @@
+import { Product } from "./product.types";
+
 export type Client = {
   id: string;
   username: string;
@@ -13,5 +15,10 @@ export type LoginResponse = {
 export type ClientProduct = {
   client_id: string;
   product_id: string;
+  quantity: number;
+};
+
+export type CartContent = {
+  product: Product;
   quantity: number;
 };

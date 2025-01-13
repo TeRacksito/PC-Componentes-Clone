@@ -1,6 +1,5 @@
-import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../../config/db";
 import { Product } from "@pcc/shared";
+import { DataTypes, Model } from "sequelize";
 import {
   CategoryModel,
   ClientModel,
@@ -9,6 +8,7 @@ import {
   ProductCategoryModel,
   ProductFlagModel,
 } from "..";
+import { sequelize } from "../../config/db";
 
 // CREATE TABLE `products` (
 //   `id` varchar(255) NOT NULL,
@@ -80,6 +80,9 @@ ProductModel.init(
     price: {
       type: DataTypes.DECIMAL(6, 2),
       allowNull: false,
+      get() {
+        return parseFloat(this.getDataValue("price"));
+      },
     },
     discount: {
       type: DataTypes.TINYINT.UNSIGNED,

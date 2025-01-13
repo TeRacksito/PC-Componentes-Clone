@@ -35,3 +35,34 @@ export const addProductToClient = async (
     }
   }
 };
+
+export const updateProductQuantityForClient = async (
+  client_id: string,
+  product_id: string,
+  quantity: number,
+) => {
+  const product = await ClientProductModel.findOne({
+    where: { client_id, product_id },
+  });
+
+  if (!product) {
+    throw new Error("Product not found");
+  }
+
+  await product.update({ quantity });
+};
+
+export const removeProductFromClient = async (
+  client_id: string,
+  product_id: string,
+) => {
+  const product = await ClientProductModel.findOne({
+    where: { client_id, product_id },
+  });
+
+  if (!product) {
+    throw new Error("Product not found");
+  }
+
+  await product.destroy();
+};
