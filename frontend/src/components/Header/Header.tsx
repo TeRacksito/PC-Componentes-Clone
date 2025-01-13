@@ -1,11 +1,11 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { FaBars, FaShoppingCart, FaTimes, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useCart } from "../../contexts/CartContext";
+import { UserIcon } from "../Icons/UserIcon";
+import { SemiPrivateRoute } from "../Routes/SemiPrivateRoute";
 import { LateralMenu, LateralMenuHandles } from "./LateralMenu";
 import PcLogo from "/pc-logo.svg";
-import { SemiPrivateRoute } from "../Routes/SemiPrivateRoute";
-import { UserIcon } from "../Icons/UserIcon";
-import { useCart } from "../../contexts/CartContext";
 
 export function Header() {
   const { count } = useCart();
