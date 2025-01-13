@@ -51,11 +51,11 @@ export function ProductCard({
         <div className="w-full flex items-center justify-center relative">
           <FlagTagContainer flags={productWithFlags.flags} />
 
-          {productWithFlags.discount != 0 ? (
+          {productWithFlags.discount != 0 && (
             <span className="absolute top-0 left-0 bg-red-700 text-white text-xs font-bold rounded px-2 py-1 z-10">
               -{productWithFlags.discount}%
             </span>
-          ) : null}
+          )}
           <img
             src={productWithFlags.thumbnail}
             alt={productWithFlags.name}
@@ -71,7 +71,7 @@ export function ProductCard({
           <span className="text-lg text-red-700 font-bold mb-4 mr-4">
             {Number(productWithFlags.price).toFixed(2)}€
           </span>
-          {productWithFlags.discount != 0 ? (
+          {productWithFlags.discount != 0 && (
             <span className="text-gray-500 line-through mr-2 text-sm">
               {(
                 Number(productWithFlags.price) /
@@ -79,7 +79,7 @@ export function ProductCard({
               ).toFixed(0)}
               €
             </span>
-          ) : null}
+          )}
           <div className="text-sm text-gray-500 flex items-center gap-1">
             {productWithFlags.seller == "PcComponentes" ? (
               <img src={PcLogo} alt="PC Clone Logo" className="h-4" />

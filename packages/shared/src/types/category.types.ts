@@ -1,7 +1,7 @@
 export type Category = {
   id: string;
   name: string;
-  parent_id: string;
+  parent_id: string | null;
 };
 
 export type CategoryWithBreadcrumb = Category & {

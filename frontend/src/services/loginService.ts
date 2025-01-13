@@ -1,7 +1,7 @@
 import { LoginResponse } from "@pcc/shared";
 
 export const login = async (identifier: string, password: string) => {
-  const response = await fetch("http://localhost:5011/api/client", {
+  const response = await fetch("http://localhost:5011/api/client/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

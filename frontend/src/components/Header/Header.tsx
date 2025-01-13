@@ -1,19 +1,15 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaBars, FaShoppingCart, FaTimes, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { LateralMenu } from "./LateralMenu";
+import { LateralMenu, LateralMenuHandles } from "./LateralMenu";
 import PcLogo from "/pc-logo.svg";
 import { SemiPrivateRoute } from "../Routes/SemiPrivateRoute";
 import { UserIcon } from "../Icons/UserIcon";
 import { useCart } from "../../contexts/CartContext";
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { count } = useCart();
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const lateralMenuRef = useRef<LateralMenuHandles>(null);
 
   return (
     <header className="bg-white sticky top-0 z-50 shadow-md whitespace-nowrap">
@@ -24,20 +20,22 @@ export function Header() {
         </Link>
 
         <button
-          onClick={toggleMenu}
+          onClick={() => lateralMenuRef.current?.showMenu(null)}
           className="hidden md:flex space-x-6 items-center justify-between px-4 py-2 rounded-sm hover:bg-gray-100 transition-colors duration-200 gap-2"
         >
           <FaBars size={24} /> Todas las categorías
         </button>
 
-        <LateralMenu isOpen={isMenuOpen} toggleMenu={toggleMenu} />
+        <LateralMenu ref={lateralMenuRef} />
 
         <div className="flex-grow sm:flex items-center space-x-2">
           <input
             type="text"
             placeholder="Buscar..."
             className="w-full px-3 py-2 text-black rounded-md"
-            onFocus={(e) => (e.target.placeholder = "Buscar... (Not implemented)")}
+            onFocus={(e) =>
+              (e.target.placeholder = "Buscar... (Not implemented)")
+            }
             onBlur={(e) => (e.target.placeholder = "Buscar...")}
           />
         </div>
@@ -77,10 +75,14 @@ export function Header() {
             <div className="hidden md:block">Mi cesta</div>
           </Link>
           <button
-            onClick={toggleMenu}
+            onClick={() => lateralMenuRef.current?.showMenu(null)}
             className="md:hidden focus:outline-none px-4 py-2 rounded-sm hover:bg-gray-100 transition-colors duration-200"
           >
-            {isMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+            {lateralMenuRef.current?.isOpen ? (
+              <FaTimes size={20} />
+            ) : (
+              <FaBars size={20} />
+            )}
           </button>
         </div>
       </div>

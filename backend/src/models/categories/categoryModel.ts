@@ -15,7 +15,7 @@ import { ProductCategoryModel, ProductModel } from "..";
 export class CategoryModel extends Model implements Category {
   declare id: string;
   declare name: string;
-  declare parent_id: string;
+  declare parent_id: string | null;
 
   public static associate() {
     CategoryModel.belongsToMany(ProductModel, {

@@ -11,4 +11,4 @@ import {
 export const clientRoutes = express.Router();
 
 clientRoutes.get("/", validateAuthTokenForce, authClientById);
-clientRoutes.post("/", validateAuthCredentials, authClientByCredentials);
+clientRoutes.post("/login", validateAuthCredentials, authClientByCredentials);

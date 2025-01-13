@@ -14,4 +14,10 @@ export const sequelize = new Sequelize(database, username, password, {
   host: host,
   dialect: "mysql",
   logging: process.env.NODE_ENV === "development" ? console.log : false,
+  retry: {
+    match: [/ECONNREFUSED/],
+    max: 20,
+    backoffBase: 1000,
+    backoffExponent: 1.5,
+  }
 });

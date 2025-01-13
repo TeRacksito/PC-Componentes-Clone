@@ -30,3 +30,11 @@ export const getCategoryChildrenFromDB = async (category: CategoryModel) => {
     },
   });
 };
+
+export const getRootCategoriesFromDB = async () => {
+  return await CategoryModel.findAll({
+    where: {
+      parent_id: null,
+    },
+  });
+};

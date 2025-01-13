@@ -18,7 +18,8 @@ export const FlagTag = ({ flag }: { flag: Flag }) => {
   };
 
   return (
-    <span className="inline-block relative">
+    <span className="inline-block relative"
+    style={{ scrollbarGutter: "unset" }}>
       <span
         className={`text-xs font-bold rounded px-2 py-1 z-10 border flex-row items-center gap-1 inline-flex relative`}
         style={{
