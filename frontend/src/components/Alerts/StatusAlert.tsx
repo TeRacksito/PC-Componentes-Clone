@@ -68,7 +68,6 @@ export const StatusAlert = forwardRef<StatusAlertHandles, StatusAlertProps>(
         className={`z-1000 fixed bottom-0 right-0 mb-4 mr-4 max-w-xs px-4 py-3 rounded shadow-lg text-white transition-transform transform flex items-center gap-2 ${
           isVisible ? "visible" : "invisible"
         } ${isTranslated ? "translate-x-0" : "translate-x-full"} ${alertClass}`}
-        style={{ scrollbarGutter: "unset" }}
       >
         {status === "success" ? (
           <FaCheckCircle />

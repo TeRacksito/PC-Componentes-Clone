@@ -1,7 +1,7 @@
 import { Category } from "@pcc/shared";
 import React, { forwardRef, useEffect, useImperativeHandle } from "react";
 import FocusLock from "react-focus-lock";
-import { FaBoxOpen, FaTimes } from "react-icons/fa";
+import { FaArrowRight, FaBoxOpen, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {
   getChildCategories,
@@ -21,6 +21,10 @@ export const LateralMenu = forwardRef<LateralMenuHandles>(({}, ref) => {
   const [parentCategory, setParentCategory] = React.useState<Category | null>(
     null,
   );
+
+  // const hasChildren = (category: Category) {
+    
+  // }
 
   const showMenu = (category: Category | null) => {
     if (category) {
@@ -110,26 +114,43 @@ export const LateralMenu = forwardRef<LateralMenuHandles>(({}, ref) => {
                 </button>
               </li>
             )}
-            {categories.map((category) => (
-              <li
-                key={category.id}
-                className="space-x-2"
-                style={{ scrollbarGutter: "unset" }}
+            {parentCategory && (
+              <Link
+                to={`/${parentCategory.id}`}
+                className="text-2xl text-gray-700 hover:text-orange-500 transition-colors duration-200 text-wrap"
+                onClick={() => setIsOpen(false)}
               >
-                <div className="inline-flex flex-col items-start flex-wrap space-x-2">
-                  <Link
+                {parentCategory.name}
+              </Link>
+            )}
+            {parentCategory && <hr />}
+
+            {categories.map((category) => (
+              <li key={category.id} className="space-x-2">
+                <div className="inline-flex flex-col items-start flex-wrap space-x-2 ml-4">
+                  {/* <Link
                     to={`/${category.id}`}
                     className="text-lg text-gray-700 hover:text-orange-500 transition-colors duration-200 text-wrap"
                     onClick={() => setIsOpen(false)}
                   >
                     {category.name}
-                  </Link>
-                  <span
+                  </Link> */}
+                  {/* <span
                     onClick={() => showMenu(category)}
                     className="text-gray-500 hover:text-gray-700 transition-colors duration-200 cursor-pointer flex items-center"
                   >
                     <FaBoxOpen size={16} className="mr-2" />
                     Ver más
+                  </span> */}
+
+                  
+
+                  <span
+                    onClick={() => showMenu(category)}
+                    className="text-lg text-gray-700 hover:text-orange-500 transition-colors duration-200 text-wrap flex flex-row cursor-pointer items-center"
+                  >
+                    {category.name}
+                    <FaArrowRight size={16} className="ml-2" />
                   </span>
                 </div>
               </li>

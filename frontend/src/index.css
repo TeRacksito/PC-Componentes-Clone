@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
-* {
+html {
+  scrollbar-gutter: stable;
+}
+
+/* * {
   scrollbar-gutter: stable;
 }
 
@@ -10,4 +14,4 @@
 
 svg {
   scrollbar-gutter: unset;
-}
+} */

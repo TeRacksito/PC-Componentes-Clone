@@ -21,10 +21,7 @@ export const ProductImageCarousel: React.FC<ProductImageCarouselProps> = ({
   };
 
   return (
-    <div
-      className="relative w-full overflow-hidden mb-5"
-      style={{ scrollbarGutter: "unset" }}
-    >
+    <div className="relative w-full overflow-hidden mb-5">
       <div
         className="flex transition-transform duration-300"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
