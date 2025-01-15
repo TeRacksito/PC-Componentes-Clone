@@ -14,6 +14,8 @@ export function Header() {
   return (
     <header className="bg-white sticky top-0 z-50 shadow-md whitespace-nowrap">
       <div className="container mx-auto flex items-center justify-between py-4 px-6 gap-1">
+        <LateralMenu ref={lateralMenuRef} />
+        
         <Link to="/" className="flex items-center text-lg font-bold mx-1">
           <img src={PcLogo} alt="PC Clone Logo" className="h-8 mr-2" />
           <div className="hidden md:block">PC Clone</div>
@@ -25,8 +27,6 @@ export function Header() {
         >
           <FaBars size={24} /> Todas las categorías
         </button>
-
-        <LateralMenu ref={lateralMenuRef} />
 
         <div className="flex-grow sm:flex items-center space-x-2">
           <input

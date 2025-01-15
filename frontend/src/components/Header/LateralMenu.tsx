@@ -168,13 +168,6 @@ export const LateralMenu = forwardRef<LateralMenuHandles>(({}, ref) => {
                       {category.name}
                     </Link>
                   )}
-                  {/* <span
-                    onClick={() => showMenu(category)}
-                    className="text-gray-500 hover:text-gray-700 transition-colors duration-200 cursor-pointer flex items-center"
-                  >
-                    <FaBoxOpen size={16} className="mr-2" />
-                    Ver más
-                  </span> */}
                 </div>
               </li>
             ))}

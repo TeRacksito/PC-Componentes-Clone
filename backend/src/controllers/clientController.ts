@@ -5,6 +5,7 @@ import { HttpError } from "../middlewares/HttpError";
 import {
   getClientByIdentifierFromDB,
   getClientByIdFromDB,
+  signUpClientToDB,
 } from "../services/clientService/client";
 import { getClientPasswordByIdFromDB } from "../services/clientService/clientPass";
 import { ClientSignature } from "../@types/clientSignature.types";
@@ -87,6 +88,18 @@ export const authClientById: RequestHandler = async (req, res, next) => {
     res.status(200).json({
       client: client.get({ plain: true }),
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const signInClient: RequestHandler = async (req, res, next) => {
+  try {
+    const { name, surname, email, username, password } = req.body;
+
+    await signUpClientToDB(name, surname, email, username, password);
+
+    res.status(200).send();
   } catch (error) {
     next(error);
   }

@@ -1,6 +1,7 @@
 import { Client } from "@pcc/shared";
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../config/db";
+import { v4 as uuidv4 } from "uuid";
 import { ClientPassModel, ClientProductModel, ProductModel } from "..";
 
 export class ClientModel extends Model implements Client {
@@ -31,8 +32,9 @@ export class ClientModel extends Model implements Client {
 ClientModel.init(
   {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUIDV4,
       primaryKey: true,
+      defaultValue: uuidv4(),
     },
     username: {
       type: DataTypes.STRING,
