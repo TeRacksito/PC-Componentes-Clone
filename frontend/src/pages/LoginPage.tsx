@@ -1,9 +1,11 @@
-import { useState } from "react";
 import { LoginForm } from "../components/LoginForm/LoginForm";
 import { SignUpForm } from "../components/LoginForm/SignUpForm";
 
-export function LoginPage() {
-  const [isLogin, setIsLogin] = useState(true);
+interface LoginPageProps {
+  isSignUp?: boolean;
+}
+
+export const LoginPage: React.FC<LoginPageProps> = ({ isSignUp = false }) => {
 
   return (
     <div className="flex items-center justify-center h-dvh">
@@ -24,10 +26,10 @@ export function LoginPage() {
         </div>
 
         <div className="md:w-1/2 w-full p-8">
-          {isLogin ? (
-            <LoginForm setIsLogin={setIsLogin} />
+          {isSignUp ? (
+            <SignUpForm />
           ) : (
-            <SignUpForm setIsLogin={setIsLogin} />
+            <LoginForm />
           )}
         </div>
       </div>

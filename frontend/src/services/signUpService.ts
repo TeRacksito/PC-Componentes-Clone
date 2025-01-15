@@ -1,3 +1,5 @@
+import { SuccessResponse, ErrorResponse } from "@pcc/shared";
+
 export const signUp = async (
   name: string,
   surname: string,
@@ -13,10 +15,14 @@ export const signUp = async (
     credentials: "include",
     body: JSON.stringify({ name, surname, email, username, password }),
   });
+  
+  if (response.status === 200) return { type: "success" } as SuccessResponse;
+  
+  const data = (await response.json()) as SuccessResponse | ErrorResponse;
 
-  if (!response.ok) {
-    throw new Error("Sign up failed");
+  if (data.type === "error") {
+    throw new Error(data.message);
   }
 
-  return true;
+  return data as SuccessResponse;
 };

@@ -35,7 +35,7 @@
 ### User-Related Pages
 
 - [x] Implement Login page (test user -> username `test` password `test`).
-- [ ] Implement Sign-Up (Registration) page.
+- [/] Implement Sign-Up (Registration) page.
 - [ ] Implement User Account page.
 - [x] Implement Cart page.
 
@@ -52,7 +52,7 @@
   - [/] Implement search bar.
   - [x] Implement user account link that changes to login or account page based on user authentication. And displays user custom icon.
   - [x] Implement cart link.
-- [ ] Improve side-slide menu for category navigation.
+- [x] Improve side-slide menu for category navigation.
   - Make the menu slide in/out smoothly.
   - Display categories starting with root categories and loading their children recursively.
 

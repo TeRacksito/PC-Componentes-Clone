@@ -25,7 +25,7 @@
 - [ ] Implement endpoints for search queries by name.
 - [/] Implement client authentication endpoints (Login, Sign-Up).
   - [x] Client login (test user -> username `test` password `test`).
-  - [ ] Client sign-up.
+  - [x] Client sign-up.
   - [x] basic authentication with JWT.
   - [x] password hashing and salting.
   - [ ] password recovery.

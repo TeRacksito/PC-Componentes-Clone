@@ -38,8 +38,8 @@ export function Home() {
     data.data as LandPageContent;
 
   return (
-    <div className="space-y-10">
-      <section className="bg-orange-500 text-white py-10 rounded-md">
+    <div className="space-y-10 -mt-10">
+      <section className="bg-orange-500 text-white p-10 rounded-md">
         <div className="container mx-auto text-center">
           <h1 className="text-4xl font-bold mb-4">PC Clone</h1>
           <p className="text-lg">

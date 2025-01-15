@@ -1,6 +1,7 @@
 import { compare } from "bcryptjs";
 import { RequestHandler } from "express";
 import { sign } from "jsonwebtoken";
+import { ClientSignature } from "../@types/clientSignature.types";
 import { HttpError } from "../middlewares/HttpError";
 import {
   getClientByIdentifierFromDB,
@@ -8,8 +9,8 @@ import {
   signUpClientToDB,
 } from "../services/clientService/client";
 import { getClientPasswordByIdFromDB } from "../services/clientService/clientPass";
-import { ClientSignature } from "../@types/clientSignature.types";
 import { addProductToClient } from "../services/clientService/clientsProducts";
+import { Error } from "sequelize";
 
 export const authClientByCredentials: RequestHandler = async (
   req,
@@ -101,6 +102,13 @@ export const signInClient: RequestHandler = async (req, res, next) => {
 
     res.status(200).send();
   } catch (error) {
+    if ((error as Error).name === "SequelizeUniqueConstraintError") {
+      console.error(error); 
+
+      next(new HttpError("Email or username already in use", 400));
+      return;
+    }
+
     next(error);
   }
 };

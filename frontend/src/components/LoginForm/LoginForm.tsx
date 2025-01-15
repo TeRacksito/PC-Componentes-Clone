@@ -4,11 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import FormInput from "./FormInput";
 import { useCart } from "../../contexts/CartContext";
 
-interface LoginFormProps {
-  setIsLogin?: (isLogin: boolean) => void;
-}
-
-export const LoginForm: React.FC<LoginFormProps> = ({ setIsLogin }) => {
+export const LoginForm: React.FC = () => {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -67,15 +63,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ setIsLogin }) => {
           Iniciar Sesión
         </button>
 
-        {setIsLogin && (  
-          <button
-          type="button"
-            className="w-full bg-white border border-gray-900 hover:border-orange-500 text-gray-900 hover:text-orange-500 font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer"
-            onClick={() => setIsLogin(false)}
-          >
-            No tengo cuenta, registrarme
-          </button>
-        )}
+        <Link
+          to="/signup"
+          className="w-full bg-white border border-gray-900 hover:border-orange-500 text-gray-900 hover:text-orange-500 font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer"
+        >
+          No tengo cuenta, registrarme
+        </Link>
 
         {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
       </form>

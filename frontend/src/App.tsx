@@ -20,6 +20,7 @@ export function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<LoginPage isSignUp={true} />} />
             <Route path="/cart" element={<CartPage />} />
             <Route element={<PrivateRoute />}>
               <Route path="/account" element={<AccountPage />} />

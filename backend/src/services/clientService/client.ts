@@ -1,5 +1,6 @@
 import { Op } from "sequelize";
 import { ClientModel, ClientPassModel } from "../../models";
+import { v4 as uuidv4 } from "uuid";
 
 export const getClientByIdFromDB = async (id: string) => {
   return ClientModel.findByPk(id);
@@ -19,16 +20,18 @@ export const signUpClientToDB = async (
   email: string,
   username: string,
   password: string,
-) => {  
+) => {
+  const newId = uuidv4();
   const newClient = await ClientModel.create({
+    id: newId,
+    username,
     name,
     surname,
     email,
-    username,
   });  
 
   await ClientPassModel.create({
-    id: newClient.id,
+    id: newId,
     password_hash: password,
   });
 

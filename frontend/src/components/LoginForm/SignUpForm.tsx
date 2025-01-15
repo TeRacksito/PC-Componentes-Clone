@@ -1,15 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useCart } from "../../contexts/CartContext";
 import FormInput from "./FormInput";
 import { signUp } from "../../services/signUpService";
 
-interface SignUpFormProps {
-  setIsLogin?: (isLogin: boolean) => void;
-}
-
-export const SignUpForm: React.FC<SignUpFormProps> = ({ setIsLogin }) => {
+export const SignUpForm: React.FC = () => {
   const { login } = useAuth();
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
@@ -23,16 +19,25 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ setIsLogin }) => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const signUpStatus = await signUp(name, surname, email, username, password);
+      const signUpStatus = await signUp(
+        name,
+        surname,
+        email,
+        username,
+        password,
+      );
       if (!signUpStatus) {
         throw new Error("Sign up failed");
       }
+
+      console.log(signUpStatus.message);
+      
 
       await login(email, password);
       navigate("/");
       reloadCart();
     } catch (error) {
-      setError("Sign up failed. Please check fields and try again.");
+      setError("Sign up failed. Please check fields and try again. " + error);
     }
   };
 
@@ -92,14 +97,12 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ setIsLogin }) => {
           Crear cuenta
         </button>
 
-        {setIsLogin && (
-          <button
-            className="w-full bg-white border border-gray-900 hover:border-orange-500 text-gray-900 hover:text-orange-500 font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer"
-            onClick={() => setIsLogin(true)}
-          >
-            Ya tengo cuenta, iniciar sesión
-          </button>
-        )}
+        <Link
+          to="/login"
+          className="w-full bg-white border border-gray-900 hover:border-orange-500 text-gray-900 hover:text-orange-500 font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer"
+        >
+          Ya tengo cuenta, iniciar sesión
+        </Link>
 
         {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
       </form>
