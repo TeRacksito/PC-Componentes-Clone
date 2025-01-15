@@ -1,7 +1,7 @@
 import { Category } from "@pcc/shared";
 import React, { forwardRef, useEffect, useImperativeHandle } from "react";
 import FocusLock from "react-focus-lock";
-import { FaArrowRight, FaBoxOpen, FaTimes } from "react-icons/fa";
+import { FaArrowRight, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {
   getChildCategories,
@@ -110,7 +110,7 @@ export const LateralMenu = forwardRef<LateralMenuHandles>(({}, ref) => {
         aria-hidden="true"
       ></div>
 
-      <FocusLock>
+      <FocusLock disabled={!isOpen}>
         <nav
           className={
             "overflow-y-auto fixed top-0 h-full pb-30 w-full left-0 sm:w-80 bg-white shadow-lg z-500 transition-transform duration-300 ease-in-out " +

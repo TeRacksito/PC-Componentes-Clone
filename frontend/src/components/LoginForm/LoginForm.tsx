@@ -7,7 +7,7 @@ import { useCart } from "../../contexts/CartContext";
 export const LoginForm: React.FC = () => {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password,  setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { reloadCart } = useCart();
