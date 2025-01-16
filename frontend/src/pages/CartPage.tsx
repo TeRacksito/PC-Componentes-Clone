@@ -16,11 +16,9 @@ export function CartPage() {
   const [error, setError] = useState<string | null>(null);
   const { setNewCount, reloadCart } = useCart();
 
-  // Calculate the total price
   const calculateTotalPrice = () => {
     return cartItems.reduce((total, { product, quantity }) => {
-      const discountedPrice = product.price * (1 - product.discount / 100);
-      return total + discountedPrice * quantity;
+      return total + product.price * quantity;
     }, 0);
   };
 
@@ -92,8 +90,6 @@ export function CartPage() {
         <>
           <div className="space-y-4">
             {cartItems.map(({ product, quantity }) => {
-              const discountedPrice =
-                product.price * (1 - product.discount / 100);
               return (
                 <div
                   key={product.id}
@@ -124,10 +120,10 @@ export function CartPage() {
                       </div>
                       <div className="flex items-center mt-2">
                         <span className="text-gray-500 line-through mr-2">
-                          {product.price.toFixed(2)}€
+                          {Math.ceil(product.price / (1 - product.discount / 100))}€
                         </span>
                         <span className="text-red-700 font-bold">
-                          {discountedPrice.toFixed(2)}€
+                          {product.price.toFixed(2)}€
                         </span>
                       </div>
                     </div>
