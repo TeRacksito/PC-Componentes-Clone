@@ -87,16 +87,21 @@ export function ProductPage({
         <ProductComments productWithFlags={productWithFlags} />{" "}
       </div>
 
-      {!isBottomVisible && (
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 rounded w-full z-200 p-4">
-          <button
-            onClick={handleClientAddToCart}
-            className="bg-orange-500 text-white py-2 px-4 rounded cursor-pointer w-full z-200"
-          >
-            Añadir al carrito
-          </button>
-        </div>
-      )}
+      <div
+        className={
+          "lg:hidden fixed bottom-0 left-0 right-0 rounded w-full z-200 p-4 transition-transform " +
+          (isBottomVisible
+            ? "transform translate-y-full"
+            : "transform translate-y-0")
+        }
+      >
+        <button
+          onClick={handleClientAddToCart}
+          className="bg-orange-500 text-white py-2 px-4 rounded cursor-pointer w-full z-200"
+        >
+          Añadir al carrito
+        </button>
+      </div>
     </div>
   );
 }

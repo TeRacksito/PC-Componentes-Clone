@@ -6,7 +6,11 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { getUser, login as loginService } from "../services/loginService";
+import {
+  getUser,
+  login as loginService,
+  logout as logoutService,
+} from "../services/loginService";
 
 type AuthState = {
   client: Client | null;
@@ -16,6 +20,7 @@ type AuthContextProps = {
   auth: AuthState;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  autoLogin: () => void;
 };
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
@@ -28,18 +33,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [auth, setAuth] = useState<AuthState>({ client: null });
 
   useEffect(() => {
-    // Fetch the user on app load
-    const fetchUser = async () => {
-      try {
-        const { client } = await getUser();
-        setAuth({ client });
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      }
-    };
-
-    fetchUser();
+    autoLogin();
   }, []);
+
+  /**
+   * Re-login the user if the token is still valid
+   */
+  const autoLogin = async () => {
+    try {
+      const { client } = await getUser();
+      setAuth({ client });
+    } catch (error) {
+      null;
+    }
+  };
 
   const login = async (email: string, password: string) => {
     try {
@@ -53,10 +60,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const logout = () => {
     setAuth({ client: null });
+    logoutService();
+    window.location.reload(); // reload to deal with UI sync issues
   };
 
   return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
+    <AuthContext.Provider value={{ auth, login, logout, autoLogin }}>
       {children}
     </AuthContext.Provider>
   );

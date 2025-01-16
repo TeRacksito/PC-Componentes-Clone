@@ -31,3 +31,10 @@ export const getUser = async () => {
   const data = await response.json();
   return data as LoginResponse;
 };
+
+export const logout = async () => {
+  await fetch("http://localhost:5011/api/client/logout", {
+    method: "POST",
+    credentials: "include",
+  });
+};

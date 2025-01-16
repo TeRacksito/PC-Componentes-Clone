@@ -103,12 +103,21 @@ export const signInClient: RequestHandler = async (req, res, next) => {
     res.status(200).send();
   } catch (error) {
     if ((error as Error).name === "SequelizeUniqueConstraintError") {
-      console.error(error); 
+      console.error(error);
 
       next(new HttpError("Email or username already in use", 400));
       return;
     }
 
+    next(error);
+  }
+};
+
+export const logoutClient: RequestHandler = async (_, res, next) => {
+  try {
+    res.clearCookie("token");
+    res.status(200).send();
+  } catch (error) {
     next(error);
   }
 };

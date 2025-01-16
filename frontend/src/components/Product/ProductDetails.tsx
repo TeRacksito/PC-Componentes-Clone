@@ -12,16 +12,15 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({
   return (
     <div className="mt-4">
       <h2 className="text-2xl font-semibold">{productWithFlags.name}</h2>
-      <div className="mt-2 text-xs flex items-center gap-2">
-        <span className="text-gray-600 underline text-nowrap">
+        <span className= "underline text-nowrap">
           {productWithFlags.brand}
         </span>
+      <div className="mt-2 text-xs flex items-center gap-2 text-gray-600">
+        <span>Oferta: {productWithFlags.offer_id}</span>
         |
-        <span className="text-gray-600">Oferta: {productWithFlags.offer_id}</span>
-        |
-        <span className="text-gray-600">Cod. Artículo: {productWithFlags.shadow_id}</span>
+        <span>Cod. Artículo: {productWithFlags.shadow_id}</span>
       </div>
-      <div className="text-sm text-gray-500 flex items-center gap-1">
+      <div className="text-sm text-gray-500 flex items-center gap-1 my-2">
         {productWithFlags.seller == "PcComponentes" ? (
           <img src={PcLogo} alt="PC Clone Logo" className="h-4" />
         ) : (

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CategoryPage } from "./CategoryPage";
 import { ProductPage } from "./ProductPage";
 import { CategoryWithBreadcrumb, ProductWithFlags } from "@pcc/shared";
+import { Error404Page } from "./Error404Page";
 
 export function DynamicPage() {
   const { slug } = useParams();
@@ -41,6 +42,6 @@ export function DynamicPage() {
     const categoryWithBreadcrumb = data?.data as CategoryWithBreadcrumb;
     return <CategoryPage categoryWithBreadcrumb={categoryWithBreadcrumb} />;
   } else {
-    return <div>Not found</div>;
+    return <Error404Page />;
   }
 }
