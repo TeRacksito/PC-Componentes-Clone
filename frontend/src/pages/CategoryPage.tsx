@@ -102,7 +102,7 @@ export function CategoryPage({
           Página {currentPage} de {maxPages}
         </span>
       </div>
-      <div className="flex items-center justify-center mt-6 gap-4">
+      <div className="flex flex-wrap items-center justify-center mt-6 gap-4">
         <LinkButton
           label="Principio"
           queryParams={{ page: currentPage - 1 }}

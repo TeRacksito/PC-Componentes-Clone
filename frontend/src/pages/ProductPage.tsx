@@ -80,7 +80,7 @@ export function ProductPage({
       </div>
 
       <div className="mt-10">
-        <ProductDescription description={"Description"} />{" "}
+        <ProductDescription description={"Not Implemented"} />{" "}
       </div>
 
       <div className="mt-10" ref={bottomRef}>

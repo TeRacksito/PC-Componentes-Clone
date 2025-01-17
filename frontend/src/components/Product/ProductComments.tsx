@@ -74,18 +74,17 @@ export const ProductComments: React.FC<ProductCommentsProps> = ({
   return (
     <div className="mt-8">
       <h2 className="text-2xl font-semibold">
-        Comments of {productWithFlags.name}
+        Comentarios de {productWithFlags.name}
       </h2>
       <div className="mt-4">
         <div key="1" className="mt-4">
           <p className="text-gray-600">
-            <span className="font-semibold">John Doe</span> This is a great
-            product!
+            <span className="font-semibold">Pepito</span> Un producto excelente!
           </p>
         </div>
         <div key="2" className="mt-4">
           <p className="text-gray-600">
-            <span className="font-semibold">Jane Doe</span> I love it!
+            <span className="font-semibold">Manolo</span> No me ha gustado nada.
           </p>
         </div>
       </div>
@@ -93,14 +92,14 @@ export const ProductComments: React.FC<ProductCommentsProps> = ({
         <textarea
           value=""
           onChange={() => {}}
-          placeholder="Write a comment..."
+          placeholder="Dinos qué piensas... (Not implemented)"
           className="w-full p-2 border border-gray-300 rounded"
         ></textarea>
         <button
           type="submit"
           className="w-full mt-2 bg-gray-800 text-white p-2 rounded"
         >
-          Comment
+          Comentar
         </button>
       </form>
     </div>

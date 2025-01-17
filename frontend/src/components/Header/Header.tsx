@@ -16,14 +16,14 @@ export function Header() {
       <div className="container mx-auto flex items-center justify-between py-4 px-6 gap-1">
         <LateralMenu ref={lateralMenuRef} />
         
-        <Link to="/" className="flex items-center text-lg font-bold mx-1">
+        <Link to="/" className="flex items-center text-lg font-bold mx-1 ">
           <img src={PcLogo} alt="PC Clone Logo" className="h-8 mr-2" />
           <div className="hidden md:block">PC Clone</div>
         </Link>
 
         <button
           onClick={() => lateralMenuRef.current?.showMenu(null)}
-          className="hidden md:flex space-x-6 items-center justify-between px-4 py-2 rounded-sm hover:bg-gray-100 transition-colors duration-200 gap-2"
+          className="hidden md:flex space-x-6 items-center justify-between px-4 py-2 rounded-sm hover:bg-gray-100 transition-colors duration-200 gap-2 cursor-pointer"
         >
           <FaBars size={24} /> Todas las categorías
         </button>

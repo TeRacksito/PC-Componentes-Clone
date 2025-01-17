@@ -51,8 +51,8 @@ export const authClientByCredentials: RequestHandler = async (
     );
 
     res.cookie("token", token, {
-      httpOnly: false,
-      secure: false,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
     });
 
     if (req.session.cart) {

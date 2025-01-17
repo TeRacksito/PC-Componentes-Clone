@@ -11,5 +11,5 @@ dynamicRouter.use(productRoutes);
 dynamicRouter.use(categoryRoutes);
 
 dynamicRouter.use((_, res) => {
-  res.status(404).json({ message: "Resource not found d" });
+  res.status(404).json({ message: "Resource not found" });
 });

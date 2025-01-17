@@ -7,7 +7,7 @@ export const ProductDescription: React.FC<ProductDescriptionProps> = ({
 }) => {
   return (
     <div className="mt-4">
-      <h2 className="text-2xl font-semibold">Description</h2>
+      <h2 className="text-2xl font-semibold">Descripción</h2>
       <p className="mt-2 text-gray-600">{description}</p>
     </div>
   );
