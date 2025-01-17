@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 interface ProductImageCarouselProps {
   images: string[];
@@ -10,15 +9,15 @@ export const ProductImageCarousel: React.FC<ProductImageCarouselProps> = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleNext = () => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
+  // const handleNext = () => {
+  //   setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
+  // };
 
-  const handlePrev = () => {
-    setActiveIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1,
-    );
-  };
+  // const handlePrev = () => {
+  //   setActiveIndex((prevIndex) =>
+  //     prevIndex === 0 ? images.length - 1 : prevIndex - 1,
+  //   );
+  // };
 
   return (
     <div className="relative w-full overflow-hidden mb-5">
