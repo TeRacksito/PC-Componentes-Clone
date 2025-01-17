@@ -96,7 +96,7 @@ export const ProductComments: React.FC<ProductCommentsProps> = ({
           className="w-full p-2 border border-gray-300 rounded"
         ></textarea>
         <button
-          // type="submit"
+          type="button"
           className="w-full mt-2 bg-gray-800 text-white p-2 rounded"
         >
           Comentar
