@@ -113,10 +113,15 @@ export const signInClient: RequestHandler = async (req, res, next) => {
   }
 };
 
-export const logoutClient: RequestHandler = async (_, res, next) => {
+export const logoutClient: RequestHandler = async (req, res, next) => {
   try {
     res.clearCookie("token");
-    res.status(200).send();
+
+    req.session.destroy(() => {
+      res.clearCookie("connect.sid");
+      res.status(200).send();
+    });
+
   } catch (error) {
     next(error);
   }
