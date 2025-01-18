@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import {
+  getCategoriesByProductFromDB,
   getCategoriesBySimilarNameFromDB,
   getCategoryChildrenFromDB,
   getCategoryModelBySlugFromDB,
@@ -8,6 +9,7 @@ import {
 } from "../services/categoryServices/category";
 import { wrapSuccessResponse } from "./responseWrapper";
 import { getCategoryWithBreadcrumbFromDB } from "../services/categoryServices/categoryWithBreadcrumb";
+import { getProductModelBySlugFromDB } from "../services/productServices/product";
 
 export const getCategoryBySlug: RequestHandler = async (req, res, next) => {
   try {
@@ -110,6 +112,38 @@ export const searchCategoriesBySimilarName: RequestHandler = async (
     }
 
     res.json(wrapSuccessResponse("categories", categories));
+    return;
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getCategoriesWithBreadcrumbsByProduct: RequestHandler = async (
+  req,
+  res,
+  next,
+) => {
+  try {
+    const { slug } = req.params;
+    const product = await getProductModelBySlugFromDB(slug);
+
+    if (!product) {
+      next();
+      return;
+    }
+
+    const categories = await getCategoriesByProductFromDB(product);
+
+    if (!categories || categories.length === 0) {
+      next();
+      return;
+    }
+
+    const categoriesWithBreadcrumbs = await Promise.all(
+      categories.map((category) => getCategoryWithBreadcrumbFromDB(category)),
+    );
+
+    res.json(wrapSuccessResponse("categories", categoriesWithBreadcrumbs));
     return;
   } catch (error) {
     next(error);

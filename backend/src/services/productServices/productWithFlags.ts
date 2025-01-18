@@ -10,15 +10,19 @@ export const getProductsWithFlagsByProductsFromDB = async (
       include: [
         {
           model: ProductModel,
+          attributes: [],
           where: {
             id: product.id,
           },
         },
       ],
     });
+
+    ;
+
     productsWithFlags.push({
       ...product.get({ plain: true }),
-      flags,
+      flags:flags.map((flag) => flag.get({ plain: true })),
     });
   }
   return productsWithFlags;

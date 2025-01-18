@@ -115,7 +115,7 @@ export const getFeaturedProductsFromDB = async (targetLength: number = 6) => {
 
     if (!chosen) {
       break;
-    }
+    }    
 
     chosenProducts.push(chosen);
 

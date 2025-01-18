@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
 import { CategoryModel } from "../../models";
 import { searchSimilarByTerm } from "../general";
+import { ProductModel } from "../../models";
 
 export const getCategoryModelBySlugFromDB = async (slug: string) => {
   return await CategoryModel.findOne({ where: { id: slug } });
@@ -43,3 +44,17 @@ export const getRootCategoriesFromDB = async () => {
 export const getCategoriesBySimilarNameFromDB = async (searchTerm: string) => {
   return searchSimilarByTerm("categories", "name", searchTerm);
 };
+
+export const getCategoriesByProductFromDB = async (product: ProductModel) => {
+  return await CategoryModel.findAll({
+    include: [
+      {
+        model: ProductModel,
+        attributes: [],
+        where: {
+          id: product.id,
+        },
+      },
+    ],
+  });
+}

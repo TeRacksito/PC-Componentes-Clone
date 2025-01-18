@@ -1,4 +1,4 @@
-import { ProductWithFlags } from "@pcc/shared";
+import { CategoryWithBreadcrumb, ProductWithFlags } from "@pcc/shared";
 import { ProductImageCarousel } from "../components/Product/ProductImageCarousel";
 import { ProductDetails } from "../components/Product/ProductDetails";
 import { ProductPriceAside } from "../components/Product/ProductPriceAside";
@@ -11,14 +11,18 @@ import {
   StatusAlertHandles,
 } from "../components/Alerts/StatusAlert";
 import { useCart } from "../contexts/CartContext";
+import { Breadcrumb } from "../components/Breadcrumbs/Breadcrumbs";
+import { getCategoryWithBreadcrumbByProduct } from "../services/categoryService";
 
 export function ProductPage({
   productWithFlags,
 }: {
   productWithFlags: ProductWithFlags;
 }) {
-  const bottomRef = useRef(null);
   const [isBottomVisible, setIsBottomVisible] = useState(false);
+  const [categoryWithBreadcrumb, setCategoryWithBreadcrumb] =
+    useState<CategoryWithBreadcrumb | null>(null);
+  const bottomRef = useRef(null);
   const alertRef = useRef<StatusAlertHandles>(null);
   const { setNewCount } = useCart();
 
@@ -36,6 +40,14 @@ export function ProductPage({
     if (bottomRef.current) {
       observer.observe(bottomRef.current);
     }
+
+    const fetchCategory = async () => {
+      setCategoryWithBreadcrumb(
+        (await getCategoryWithBreadcrumbByProduct(productWithFlags.id))[0],
+      );
+    };
+
+    fetchCategory();
   }, []);
 
   const handleClientAddToCart = async () => {
@@ -53,7 +65,13 @@ export function ProductPage({
     }
   };
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto">
+      {categoryWithBreadcrumb && (
+        <Breadcrumb
+          categoryWithBreadcrumb={categoryWithBreadcrumb}
+          isLastClickable={true}
+        />
+      )}
       <StatusAlert ref={alertRef} />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
