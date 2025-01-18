@@ -9,6 +9,7 @@ export function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string>("");
 
+  // should be moved to a service
   useEffect(() => {
     const fetchData = () => {
       fetch("http://localhost:5011/api?products=8&categories=4")

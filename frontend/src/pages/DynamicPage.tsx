@@ -5,6 +5,7 @@ import { ProductPage } from "./ProductPage";
 import { CategoryWithBreadcrumb, ProductWithFlags } from "@pcc/shared";
 import { Error404Page } from "./Error404Page";
 import { LoadingCircle } from "../components/Loading/LoadingCircle";
+import { dynamicFetch } from "../services/dynamicService";
 
 export function DynamicPage() {
   const { slug } = useParams();
@@ -13,23 +14,13 @@ export function DynamicPage() {
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    const fetchData = () => {
-      fetch(`http://localhost:5011/api/${slug}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setData(data);
-        })
-        .catch((err) => {
-          setError("Failed to fetch data");
-          console.error(err);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
+    const fetchData = async (slug: string) => {
+      setData(await dynamicFetch(slug));
+      setIsLoading(false);
     };
 
     if (slug) {
-      fetchData();
+      fetchData(slug);
     }
   }, [slug]);
 

@@ -24,6 +24,7 @@ export function CategoryPage({
 
   const location = useLocation();
 
+  // should be moved to a service
   useEffect(() => {
     const fetchData = () => {
       const url = `http://localhost:5011/api/${
