@@ -2,22 +2,28 @@
   "editor.tabSize": 2,
   "cSpell.words": [
     "appendonly",
+    "CONV",
     "findstr",
+    "healthcheck",
     "initdb",
     "levenshtein",
     "mysql",
+    "mysqladmin",
     "netsh",
     "nodenext",
     "pcchoice",
     "pcrecommended",
+    "pingtest",
     "redhat",
     "redis",
     "resave",
     "tailwindcss",
     "taskkill",
     "tinyint",
+    "UNHEX",
     "uuidv",
     "UUIDV",
+    "VARBINARY",
     "winnat"
   ]
 }

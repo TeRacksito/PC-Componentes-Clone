@@ -4,7 +4,7 @@ PC-Componentes-Clone is a full-stack project designed to replicate the functiona
 
 ## ToDo and README
 
-Read the ToDos and READMEs in root project, frontend and backend. There can be found an overall view of currently implementend features, and future plans.
+Read the ToDos and READMEs in root project, frontend and backend. There can be found an overall view of currently implemented features, and future plans.
 
 ## Main branch
 
@@ -57,6 +57,10 @@ Main branch should be a functional version of the project, in terms of basic fea
    docker compose watch
    ```
 
+   ```bash
+
+   ```
+
 4. **Access the Application**:
 
    - Frontend: Open a web browser and navigate to `http://localhost:5012`.
@@ -95,6 +99,13 @@ Main branch should be a functional version of the project, in terms of basic fea
 
 - **package-lock.json**: There shouldn't be package-lock files other that the root one. Because NPM is set up with workspaces, all packages goes to root lock file.
   Having this in mind, the extension `Red Hat Dependency Analytics` with ID `redhat.fabric8-analytics` is not recommended for this project. As it creates a package-lock.json for every workspace. To remove it, you can disable the extension or remove it from the workspace settings.
+
+- **Database reinitialization**: While shouldn't be necessary, is recommended to reinitialize the database if there are any issues. Although these should be reported and fixed.
+  This is because database reinitialization shouldn't be necessary, as the backend creates tables, procedures and functions needed for the project. If there is any issue caused by the lack of these, it should be reported and fixed. But as a last resort, you can reinitialize the database by running the following command:
+  ```bash
+  docker compose down -v
+  docker compose watch
+  ```
 
 ## Known bugs
 

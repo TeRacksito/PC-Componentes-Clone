@@ -7,6 +7,7 @@ import { ProductCategoryModel } from "./products/productCategoriesModel";
 import { FlagModel } from "./products/flagsModel";
 import { ProductFlagModel } from "./products/productFlagsModel";
 import { ClientProductModel } from "./clients/clientProductModel";
+import { dbAddFunctionsAndProcedures } from "./dbAddProcedures";
 
 CategoryModel.associate();
 ProductModel.associate();
@@ -18,6 +19,8 @@ ClientPassModel.associate();
 ClientProductModel.associate();
 
 sequelize.sync();
+
+dbAddFunctionsAndProcedures();
 
 export {
   sequelize,
