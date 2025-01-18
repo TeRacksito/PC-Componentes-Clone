@@ -5,6 +5,7 @@ import { Breadcrumb } from "../components/Breadcrumbs/Breadcrumbs";
 import { LinkButton } from "../components/Buttons/LinkButton";
 import { PageNavigator } from "../components/Buttons/PageNavigator";
 import { ProductCard } from "../components/Product/ProductCard";
+import { LoadingCircle } from "../components/Loading/LoadingCircle";
 
 const TRANSLATE_ORDER_CRITERIA: { [key: string]: string } = {
   offer: "Oferta",
@@ -46,7 +47,7 @@ export function CategoryPage({
     fetchData();
   }, [location.pathname, location.search, categoryWithBreadcrumb.id]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingCircle />;
   if (error) return <div>{error}</div>;
 
   if (!data || data.type !== "products") return <div>No products found</div>;

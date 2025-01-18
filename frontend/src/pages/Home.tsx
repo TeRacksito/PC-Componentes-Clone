@@ -2,6 +2,7 @@ import { Category, LandPageContent } from "@pcc/shared";
 import { useEffect, useState } from "react";
 import { CategoryCard } from "../components/CategoryCard/CategoryCard";
 import { ProductCard } from "../components/Product/ProductCard";
+import { LoadingCircle } from "../components/Loading/LoadingCircle";
 
 export function Home() {
   const [data, setData] = useState<any>(null);
@@ -27,7 +28,7 @@ export function Home() {
     fetchData();
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingCircle />;
   if (error) return <div>{error}</div>;
 
   if (data?.type != "home") {

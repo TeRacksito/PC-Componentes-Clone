@@ -12,12 +12,36 @@ export const useOnClickOutside = (
       handler();
     };
 
+    const escapeListener = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handler();
+      }
+    };
+
     document.addEventListener("mousedown", listener);
     document.addEventListener("touchstart", listener);
+    document.addEventListener("keydown", escapeListener);
 
     return () => {
       document.removeEventListener("mousedown", listener);
       document.removeEventListener("touchstart", listener);
+      document.removeEventListener("keydown", escapeListener);
     };
   }, [ref, handler]);
+};
+
+export const useEscapeKey = (handler: () => void) => {
+  useEffect(() => {
+    const escapeListener = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handler();
+      }
+    };
+
+    document.addEventListener("keydown", escapeListener);
+
+    return () => {
+      document.removeEventListener("keydown", escapeListener);
+    };
+  }, [handler]);
 };

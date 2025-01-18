@@ -9,6 +9,7 @@ import PcLogo from "/pc-logo.svg";
 import { FaShop } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
+import { LoadingCircle } from "../components/Loading/LoadingCircle";
 
 export function CartPage() {
   const [cartItems, setCartItems] = useState<CartContent[]>([]);
@@ -74,7 +75,11 @@ export function CartPage() {
   };
 
   if (loading) {
-    return <div className="text-center mt-10">Loading cart...</div>;
+    return (
+      <div className="text-center mt-10">
+        <LoadingCircle />
+      </div>
+    );
   }
 
   if (error) {
@@ -120,7 +125,10 @@ export function CartPage() {
                       </div>
                       <div className="flex items-center mt-2">
                         <span className="text-gray-500 line-through mr-2">
-                          {Math.ceil(product.price / (1 - product.discount / 100))}€
+                          {Math.ceil(
+                            product.price / (1 - product.discount / 100),
+                          )}
+                          €
                         </span>
                         <span className="text-red-700 font-bold">
                           {product.price.toFixed(2)}€

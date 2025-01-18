@@ -4,6 +4,7 @@
     "appendonly",
     "findstr",
     "initdb",
+    "levenshtein",
     "mysql",
     "netsh",
     "nodenext",

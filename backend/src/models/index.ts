@@ -20,6 +20,7 @@ ClientProductModel.associate();
 sequelize.sync();
 
 export {
+  sequelize,
   CategoryModel,
   ProductModel,
   ProductCategoryModel,

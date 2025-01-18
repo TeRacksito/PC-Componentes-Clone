@@ -6,6 +6,7 @@ import { UserIcon } from "../Icons/UserIcon";
 import { SemiPrivateRoute } from "../Routes/SemiPrivateRoute";
 import { LateralMenu, LateralMenuHandles } from "./LateralMenu";
 import PcLogo from "/pc-logo.svg";
+import { SearchBar } from "./SearchBar";
 
 export function Header() {
   const { count } = useCart();
@@ -28,17 +29,7 @@ export function Header() {
           <FaBars size={24} /> Todas las categorías
         </button>
 
-        <div className="flex-grow sm:flex items-center space-x-2">
-          <input
-            type="text"
-            placeholder="Buscar..."
-            className="w-full px-3 py-2 text-black rounded-md"
-            onFocus={(e) =>
-              (e.target.placeholder = "Buscar... (Not implemented)")
-            }
-            onBlur={(e) => (e.target.placeholder = "Buscar...")}
-          />
-        </div>
+        <SearchBar />
 
         <div className="flex items-center md:gap-4">
           <SemiPrivateRoute

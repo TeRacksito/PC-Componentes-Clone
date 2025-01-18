@@ -4,6 +4,7 @@ import {
   DEFAULT_ORDER_CRITERIA,
   getProductModelBySlugFromDB,
   getProductsByInheritedCategoriesFromDB,
+  getProductsBySimilarNameFromDB,
   getTotalProductsByInheritedCategoriesFromDB,
   ORDER_CRITERIA,
   ORDER_CRITERIA_TYPE,
@@ -119,6 +120,28 @@ export const getProductsByCategorySlug: RequestHandler = async (
       totalProducts,
       data: products,
     });
+    return;
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const searchProductsBySimilarName: RequestHandler = async (
+  req,
+  res,
+  next,
+) => {
+  try {
+    const { searchTerm } = req.params;
+
+    const products = await getProductsBySimilarNameFromDB(searchTerm);
+
+    if (!products || products.length === 0) {
+      next();
+      return;
+    }
+
+    res.json(wrapSuccessResponse("products", products));
     return;
   } catch (error) {
     next(error);

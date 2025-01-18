@@ -8,6 +8,7 @@ import {
 } from "../../models";
 import { getCategoryModelBySlugFromDB } from "../categoryServices/category";
 import { getCategoryTreeFromDB } from "../categoryServices/categoryTree";
+import { searchSimilarByTerm } from "../general";
 
 export const getProductModelBySlugFromDB = async (slug: string) => {
   return await ProductModel.findOne({ where: { id: slug } });
@@ -190,4 +191,8 @@ export const getTotalProductsByInheritedCategoriesFromDB = async (
       },
     ],
   });
+};
+
+export const getProductsBySimilarNameFromDB = async (searchTerm: string) => {
+  return searchSimilarByTerm("products", "name", searchTerm);
 };

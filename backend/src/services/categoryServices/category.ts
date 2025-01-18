@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import { CategoryModel } from "../../models";
+import { searchSimilarByTerm } from "../general";
 
 export const getCategoryModelBySlugFromDB = async (slug: string) => {
   return await CategoryModel.findOne({ where: { id: slug } });
@@ -37,4 +38,8 @@ export const getRootCategoriesFromDB = async () => {
       parent_id: null,
     },
   });
+};
+
+export const getCategoriesBySimilarNameFromDB = async (searchTerm: string) => {
+  return searchSimilarByTerm("categories", "name", searchTerm);
 };

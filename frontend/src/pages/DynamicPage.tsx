@@ -4,6 +4,7 @@ import { CategoryPage } from "./CategoryPage";
 import { ProductPage } from "./ProductPage";
 import { CategoryWithBreadcrumb, ProductWithFlags } from "@pcc/shared";
 import { Error404Page } from "./Error404Page";
+import { LoadingCircle } from "../components/Loading/LoadingCircle";
 
 export function DynamicPage() {
   const { slug } = useParams();
@@ -32,7 +33,7 @@ export function DynamicPage() {
     }
   }, [slug]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingCircle />;
   if (error) return <div>{error}</div>;
 
   if (data?.type === "product") {

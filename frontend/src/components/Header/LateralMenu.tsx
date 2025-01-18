@@ -8,6 +8,7 @@ import {
   getParentCategory,
   getRootCategories,
 } from "../../services/categoryService";
+import { Overlay } from "./Overlay";
 
 export interface LateralMenuHandles {
   showMenu: (category: Category | null) => void;
@@ -100,15 +101,7 @@ export const LateralMenu = forwardRef<LateralMenuHandles>(({}, ref) => {
 
   return (
     <>
-      {/* Overlay */}
-      <div
-        className={
-          "fixed inset-0 bg-black/50 z-40 cursor-pointer backdrop-blur-[1.5px] " +
-          (isOpen ? "block" : "hidden")
-        }
-        onClick={() => setIsOpen(false)}
-        aria-hidden="true"
-      ></div>
+      <Overlay isOpen={isOpen} onClose={() => setIsOpen(false)} />
 
       <FocusLock disabled={!isOpen}>
         <nav

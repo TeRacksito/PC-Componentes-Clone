@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import {
+  getCategoriesBySimilarNameFromDB,
   getCategoryChildrenFromDB,
   getCategoryModelBySlugFromDB,
   getCategoryParentFromDB,
@@ -84,14 +85,33 @@ export const getParentCategory: RequestHandler = async (req, res, next) => {
       throw new Error("Parent category not found");
     }
 
-    res.json(
-      wrapSuccessResponse(
-        "category",
-        parent.get({ plain: true }),
-      ),
-    );
+    res.json(wrapSuccessResponse("category", parent.get({ plain: true })));
     return;
   } catch (error) {
     next(error);
   }
-}
+};
+
+export const searchCategoriesBySimilarName: RequestHandler = async (
+  req,
+  res,
+  next,
+) => {
+  try {
+    const { searchTerm } = req.params;
+
+    console.log(searchTerm);
+
+    const categories = await getCategoriesBySimilarNameFromDB(searchTerm);
+
+    if (!categories || categories.length === 0) {
+      next();
+      return;
+    }
+
+    res.json(wrapSuccessResponse("categories", categories));
+    return;
+  } catch (error) {
+    next(error);
+  }
+};
