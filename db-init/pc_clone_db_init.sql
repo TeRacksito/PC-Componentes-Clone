@@ -28,6 +28,49 @@ CREATE DATABASE IF NOT EXISTS pc_clone_db
   COLLATE utf8mb4_unicode_ci;
 USE pc_clone_db;
 
+DELIMITER $$
+CREATE DEFINER=`root`@`%` FUNCTION `pc_clone_db`.`levenshtein`( s1 VARCHAR(255), s2 VARCHAR(255) ) RETURNS int
+    DETERMINISTIC
+BEGIN
+        DECLARE s1_len, s2_len, i, j, c, c_temp, cost INT;
+        DECLARE s1_char CHAR;
+        -- max strlen=255
+        DECLARE cv0, cv1 VARBINARY(256);
+
+        SET s1_len = CHAR_LENGTH(s1), s2_len = CHAR_LENGTH(s2), cv1 = 0x00, j = 1, i = 1, c = 0;
+
+        IF s1 = s2 THEN
+            RETURN 0;
+        ELSEIF s1_len = 0 THEN
+            RETURN s2_len;
+        ELSEIF s2_len = 0 THEN
+            RETURN s1_len;
+        ELSE
+            WHILE j <= s2_len DO
+                SET cv1 = CONCAT(cv1, UNHEX(HEX(j))), j = j + 1;
+            END WHILE;
+            WHILE i <= s1_len DO
+                SET s1_char = SUBSTRING(s1, i, 1), c = i, cv0 = UNHEX(HEX(i)), j = 1;
+                WHILE j <= s2_len DO
+                    SET c = c + 1;
+                    IF s1_char = SUBSTRING(s2, j, 1) THEN
+                        SET cost = 0; ELSE SET cost = 1;
+                    END IF;
+                    SET c_temp = CONV(HEX(SUBSTRING(cv1, j, 1)), 16, 10) + cost;
+                    IF c > c_temp THEN SET c = c_temp; END IF;
+                    SET c_temp = CONV(HEX(SUBSTRING(cv1, j+1, 1)), 16, 10) + 1;
+                    IF c > c_temp THEN
+                        SET c = c_temp;
+                    END IF;
+                    SET cv0 = CONCAT(cv0, UNHEX(HEX(c))), j = j + 1;
+                END WHILE;
+                SET cv1 = cv0, i = i + 1;
+            END WHILE;
+        END IF;
+        RETURN c;
+    END$$
+DELIMITER ;
+
 DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -37,6 +80,7 @@ CREATE TABLE `categories` (
   `parent_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `parent_id` (`parent_id`),
+  FULLTEXT KEY `name` (`name`),
   CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -60,10 +104,10 @@ DROP TABLE IF EXISTS `clients`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `clients` (
   `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `surname` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `surname` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `clients_unique` (`email`),
   UNIQUE KEY `clients_unique_1` (`username`)
@@ -132,8 +176,8 @@ DROP TABLE IF EXISTS `clients_products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `clients_products` (
-  `client_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `client_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `quantity` smallint unsigned DEFAULT '1',
   PRIMARY KEY (`client_id`,`product_id`),
   KEY `product_id` (`product_id`),
@@ -141,6 +185,15 @@ CREATE TABLE `clients_products` (
   CONSTRAINT `client_products_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `clients_products`
+--
+
+LOCK TABLES `clients_products` WRITE;
+/*!40000 ALTER TABLE `clients_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `clients_products` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `flags`
@@ -239,7 +292,8 @@ CREATE TABLE `products` (
   `offer_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `brand` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `thumbnail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  FULLTEXT KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -290,4 +344,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-13  3:20:49
+-- Dump completed on 2025-01-18  3:29:38
