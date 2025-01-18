@@ -24,11 +24,13 @@ Main branch should be a functional version of the project, in terms of basic fea
 ### Prerequisites
 
 - Ensure you have the following software installed:
+
   - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
   - [Docker](https://docs.docker.com/get-docker/)
   - [Docker Compose](https://docs.docker.com/compose/install/)
 
   It's recommended to use Docker Desktop for inexperienced users of Docker
+
   - [Docker Desktop](https://app.docker.com/signup)
 
 ### Setup Instructions
@@ -93,3 +95,7 @@ Main branch should be a functional version of the project, in terms of basic fea
 
 - **package-lock.json**: There shouldn't be package-lock files other that the root one. Because NPM is set up with workspaces, all packages goes to root lock file.
   Having this in mind, the extension `Red Hat Dependency Analytics` with ID `redhat.fabric8-analytics` is not recommended for this project. As it creates a package-lock.json for every workspace. To remove it, you can disable the extension or remove it from the workspace settings.
+
+## Known bugs
+
+- **User log in with large product's quantities**: When a user logs in with a cart having any product that has a quantity greater than the supported by the database, the log will show an error, but will be successfully at the same time (upon page reload, and the cart will be empty). This happens because the session allows for a much larger product quantity than the database, and when logging in, the session is dumped into the database, causing the error.
