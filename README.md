@@ -57,10 +57,6 @@ Main branch should be a functional version of the project, in terms of basic fea
    docker compose watch
    ```
 
-   ```bash
-
-   ```
-
 4. **Access the Application**:
 
    - Frontend: Open a web browser and navigate to `http://localhost:5012`.
