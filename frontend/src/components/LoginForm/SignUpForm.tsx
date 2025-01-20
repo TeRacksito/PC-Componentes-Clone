@@ -31,13 +31,25 @@ export const SignUpForm: React.FC = () => {
       }
 
       console.log(signUpStatus.message);
-      
 
       await login(email, password);
       navigate("/");
       reloadCart();
     } catch (error) {
       setError("Sign up failed. Please check fields and try again. " + error);
+    }
+  };
+
+  const handlePatternField = (
+    pattern: string,
+    message: string,
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const re = new RegExp(pattern);
+    if (re.test(e.target.value)) {
+      e.target.setCustomValidity("");
+    } else {
+      e.target.setCustomValidity(message);
     }
   };
 
@@ -54,6 +66,9 @@ export const SignUpForm: React.FC = () => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder=" "
+          minLength={3}
+          maxLength={32}
+          required
         />
 
         <FormInput
@@ -69,16 +84,36 @@ export const SignUpForm: React.FC = () => {
           id="email"
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            !e.target.validity.typeMismatch &&
+              handlePatternField(
+                "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+                "El email debe seguir un formato estándar",
+                e,
+              );
+          }}
           placeholder=" "
+          maxLength={255}
+          required
         />
 
         <FormInput
           label="Nombre de usuario"
           id="username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => {
+            setUsername(e.target.value);
+            handlePatternField(
+              "^[a-zA-Z0-9_]+$",
+              "El nombre de usuario solo puede contener letras del alfabeto inglés, números y guiones bajos",
+              e,
+            );
+          }}
           placeholder=" "
+          minLength={3}
+          maxLength={32}
+          required
         />
 
         <FormInput
@@ -86,8 +121,18 @@ export const SignUpForm: React.FC = () => {
           type="password"
           id="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            handlePatternField(
+              "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).+$",
+              "La contraseña debe contener al menos un número, una letra minúscula y una letra mayúscula",
+              e,
+            );
+          }}  
           placeholder=" "
+          minLength={8}
+          maxLength={255}
+          required
         />
 
         <button

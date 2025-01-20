@@ -15,7 +15,12 @@ export function DynamicPage() {
 
   useEffect(() => {
     const fetchData = async (slug: string) => {
-      setData(await dynamicFetch(slug));
+      try {
+        setData(await dynamicFetch(slug));
+      } catch (error) {
+        setError("Failed to fetch data");
+        console.error(error);
+      }
       setIsLoading(false);
     };
 
