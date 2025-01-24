@@ -1,7 +1,7 @@
 import { LoginResponse } from "@pcc/shared";
 
 export const login = async (identifier: string, password: string) => {
-  const response = await fetch("http://localhost:5011/api/client/login", {
+  const response = await fetch("/api/client/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export const login = async (identifier: string, password: string) => {
 };
 
 export const getUser = async () => {
-  const response = await fetch("http://localhost:5011/api/client", {
+  const response = await fetch("/api/client", {
     method: "GET",
     credentials: "include",
   });
@@ -33,7 +33,7 @@ export const getUser = async () => {
 };
 
 export const logout = async () => {
-  await fetch("http://localhost:5011/api/client/logout", {
+  await fetch("/api/client/logout", {
     method: "POST",
     credentials: "include",
   });

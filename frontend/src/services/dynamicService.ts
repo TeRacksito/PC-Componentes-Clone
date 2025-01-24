@@ -1,5 +1,5 @@
 export const dynamicFetch = async (slug: string) => {
-  const response = await fetch(`http://localhost:5011/api/${slug}`, {
+  const response = await fetch(`/api/${slug}`, {
     method: "GET",
   });
 

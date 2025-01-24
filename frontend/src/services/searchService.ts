@@ -1,7 +1,7 @@
 import { Category, Product } from "@pcc/shared";
 
 export const searchByName = async (slug: string) => {
-  const response = await fetch(`http://localhost:5011/api/search/${slug}`, {
+  const response = await fetch(`/api/search/${slug}`, {
     method: "GET",
   });
 

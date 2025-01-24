@@ -12,7 +12,7 @@ export function Home() {
   // should be moved to a service
   useEffect(() => {
     const fetchData = () => {
-      fetch("http://localhost:5011/api?products=8&categories=4")
+      fetch("/api?products=8&categories=4")
         .then((response) => response.json())
         .then((data) => {
           setData(data);

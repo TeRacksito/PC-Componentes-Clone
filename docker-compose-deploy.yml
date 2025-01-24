@@ -8,6 +8,13 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./db-init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "(mysqladmin ping -u pingtest || exit 1) && sleep 1"]
+      interval: 5s
+      retries: 20
+      start_interval: 5s
+      start_period: 10s
+
   redis:
     image: redis:latest
     ports:
@@ -15,6 +22,11 @@ services:
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
       - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 20
+      start_interval: 5s
 
   backend:
     build:
@@ -27,17 +39,34 @@ services:
       DB_NAME: pc_clone_db
       NODE_ENV: production
       PORT: 5011
+      REDIS_URL: redis://redis:6379
     ports:
       - "5011:5011"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5011/api/health"]
+      interval: 5s
+      retries: 20
+      start_interval: 5s
 
   frontend:
     build:
       context: .
       dockerfile: ./frontend/DockerfileDeploy
-    volumes:
-      - ./frontend:/app/frontend/dist
+    ports:
+      - "5012:5012"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5012"]
+      interval: 5s
+      retries: 20
+      start_interval: 5s
 
 volumes:
   db_data:

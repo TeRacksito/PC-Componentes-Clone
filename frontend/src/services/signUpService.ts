@@ -7,7 +7,7 @@ export const signUp = async (
   username: string,
   password: string,
 ) => {
-  const response = await fetch("http://localhost:5011/api/client", {
+  const response = await fetch("/api/client", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,9 +15,9 @@ export const signUp = async (
     credentials: "include",
     body: JSON.stringify({ name, surname, email, username, password }),
   });
-  
+
   if (response.status === 200) return { type: "success" } as SuccessResponse;
-  
+
   const data = (await response.json()) as SuccessResponse | ErrorResponse;
 
   if (data.type === "error") {

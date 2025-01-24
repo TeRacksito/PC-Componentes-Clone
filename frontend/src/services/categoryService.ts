@@ -1,12 +1,9 @@
 import { Category, CategoryWithBreadcrumb } from "@pcc/shared";
 
 export const getRootCategories = async () => {
-  const response = await fetch(
-    "http://localhost:5011/api/category/children/root",
-    {
-      method: "GET",
-    },
-  );
+  const response = await fetch("/api/category/children/root", {
+    method: "GET",
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch root categories");
@@ -17,12 +14,9 @@ export const getRootCategories = async () => {
 };
 
 export const getChildCategories = async (id: string) => {
-  const response = await fetch(
-    `http://localhost:5011/api/category/children/${id}`,
-    {
-      method: "GET",
-    },
-  );
+  const response = await fetch(`/api/category/children/${id}`, {
+    method: "GET",
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch child categories");
@@ -33,12 +27,9 @@ export const getChildCategories = async (id: string) => {
 };
 
 export const getParentCategory = async (id: string) => {
-  const response = await fetch(
-    `http://localhost:5011/api/category/parent/${id}`,
-    {
-      method: "GET",
-    },
-  );
+  const response = await fetch(`/api/category/parent/${id}`, {
+    method: "GET",
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch parent category");
@@ -49,12 +40,9 @@ export const getParentCategory = async (id: string) => {
 };
 
 export const getCategoryWithBreadcrumbByProduct = async (slug: string) => {
-  const response = await fetch(
-    `http://localhost:5011/api/category/product/${slug}`,
-    {
-      method: "GET",
-    },
-  );
+  const response = await fetch(`/api/category/product/${slug}`, {
+    method: "GET",
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch category by product");

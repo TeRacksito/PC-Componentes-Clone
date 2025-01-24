@@ -11,4 +11,4 @@ RUN npm install
 WORKDIR /usr/src/app/backend
 
 RUN npm run build
-CMD [ "wait-for-it", "db:3306", "--", "npm", "run", "start" ]
+CMD [ "npm", "run", "start" ]

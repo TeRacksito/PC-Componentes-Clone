@@ -1,7 +1,7 @@
 import { CartContent } from "@pcc/shared";
 
 export const addToCart = async (product_id: string, quantity: number = 1) => {
-  const response = await fetch(`http://localhost:5011/api/cart/${product_id}`, {
+  const response = await fetch(`/api/cart/${product_id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export const addToCart = async (product_id: string, quantity: number = 1) => {
 };
 
 export const getCart = async () => {
-  const response = await fetch("http://localhost:5011/api/cart", {
+  const response = await fetch("/api/cart", {
     method: "GET",
     credentials: "include",
   });
@@ -46,7 +46,7 @@ export const updateCartItemQuantity = async (
   product_id: string,
   quantity: number = 1,
 ) => {
-  const response = await fetch(`http://localhost:5011/api/cart/${product_id}`, {
+  const response = await fetch(`/api/cart/${product_id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const updateCartItemQuantity = async (
 };
 
 export const removeCartItem = async (product_id: string) => {
-  const response = await fetch(`http://localhost:5011/api/cart/${product_id}`, {
+  const response = await fetch(`/api/cart/${product_id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

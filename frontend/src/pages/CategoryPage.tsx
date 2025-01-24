@@ -27,7 +27,7 @@ export function CategoryPage({
   // should be moved to a service
   useEffect(() => {
     const fetchData = () => {
-      const url = `http://localhost:5011/api/${
+      const url = `/api/${
         categoryWithBreadcrumb.id
       }/products/${window.location.pathname.split("/")[3] + location.search}`;
 
