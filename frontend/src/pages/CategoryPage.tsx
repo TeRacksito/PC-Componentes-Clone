@@ -27,9 +27,13 @@ export function CategoryPage({
   // should be moved to a service
   useEffect(() => {
     const fetchData = () => {
+      const filter = window.location.pathname.split("/")[2] || "";
+
       const url = `/api/${
         categoryWithBreadcrumb.id
-      }/products/${window.location.pathname.split("/")[3] + location.search}`;
+      }/products/${filter}${location.search}`;
+
+      console.log(url);
 
       fetch(url)
         .then((response) => response.json())
