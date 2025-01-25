@@ -1,5 +1,10 @@
 import { Category } from "@pcc/shared";
-import React, { forwardRef, useEffect, useImperativeHandle } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+} from "react";
 import FocusLock from "react-focus-lock";
 import { FaArrowRight, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -9,6 +14,8 @@ import {
   getRootCategories,
 } from "../../services/categoryService";
 import { Overlay } from "./Overlay";
+import { LoadingCircle } from "../Loading/LoadingCircle";
+import { debounce } from "../../utils/debounce";
 
 export interface LateralMenuHandles {
   showMenu: (category: Category | null) => void;
@@ -20,6 +27,7 @@ type CategoryWithHasChildren = Category & { hasChildren: boolean };
 
 export const LateralMenu = forwardRef<LateralMenuHandles>(({}, ref) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [categories, setCategories] = React.useState<CategoryWithHasChildren[]>(
     [],
   );
@@ -32,7 +40,11 @@ export const LateralMenu = forwardRef<LateralMenuHandles>(({}, ref) => {
     return children.length > 0;
   };
 
+  const debounceSetLoading = useCallback(debounce(setIsLoading, 300), []);
+
   const showMenu = async (category: Category | null) => {
+    setIsOpen(true);
+    debounceSetLoading(true);
     const children = category
       ? await getChildCategories(category.id)
       : await getRootCategories();
@@ -51,7 +63,8 @@ export const LateralMenu = forwardRef<LateralMenuHandles>(({}, ref) => {
     );
 
     setParentCategory(category);
-    setIsOpen(true);
+    debounceSetLoading.cancel();
+    setIsLoading(false);
   };
 
   const goBack = async () => {
@@ -97,8 +110,6 @@ export const LateralMenu = forwardRef<LateralMenuHandles>(({}, ref) => {
     return () => window.removeEventListener("keydown", handleEsc);
   }, [isOpen]);
 
-  // if (!isOpen) return null;
-
   return (
     <>
       <Overlay isOpen={isOpen} onClose={() => setIsOpen(false)} />
@@ -106,7 +117,7 @@ export const LateralMenu = forwardRef<LateralMenuHandles>(({}, ref) => {
       <FocusLock disabled={!isOpen}>
         <nav
           className={
-            "overflow-y-auto fixed top-0 h-full pb-30 w-full left-0 sm:w-80 bg-white shadow-lg z-500 transition-transform duration-300 ease-in-out " +
+            "fixed top-0 h-full w-full left-0 sm:w-80 bg-white shadow-lg z-500 transition-transform duration-300 ease-in-out " +
             (isOpen ? "transform translate-x-0" : "transform -translate-x-full")
           }
           aria-label="Main Navigation"
@@ -118,7 +129,7 @@ export const LateralMenu = forwardRef<LateralMenuHandles>(({}, ref) => {
           >
             <FaTimes size={24} className="float-right sm:float-start" />
           </button>
-          <ul className="flex flex-col mt-16 space-y-6 p-6">
+          <ul className="flex flex-col mt-16 space-y-6 p-6 overflow-y-auto pb-30 max-h-screen">
             {parentCategory && (
               <li>
                 <button
@@ -140,30 +151,33 @@ export const LateralMenu = forwardRef<LateralMenuHandles>(({}, ref) => {
               </Link>
             )}
             {parentCategory && <hr />}
-
-            {categories.map((category) => (
-              <li key={category.id} className="space-x-2">
-                <div className="inline-flex flex-col items-start flex-wrap space-x-2 ml-4">
-                  {category.hasChildren ? (
-                    <span
-                      onClick={() => showMenu(category)}
-                      className="text-lg text-gray-700 hover:text-orange-500 transition-colors duration-200 text-wrap flex flex-row cursor-pointer items-center"
-                    >
-                      {category.name}
-                      <FaArrowRight size={16} className="ml-2" />
-                    </span>
-                  ) : (
-                    <Link
-                      to={`/${category.id}`}
-                      className="text-lg text-gray-700 hover:text-orange-500 transition-colors duration-200 text-wrap"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {category.name}
-                    </Link>
-                  )}
-                </div>
-              </li>
-            ))}
+            {isLoading ? (
+              <LoadingCircle />
+            ) : (
+              categories.map((category) => (
+                <li key={category.id} className="space-x-2">
+                  <div className="inline-flex flex-col items-start flex-wrap space-x-2 ml-4">
+                    {category.hasChildren ? (
+                      <span
+                        onClick={() => showMenu(category)}
+                        className="text-lg text-gray-700 hover:text-orange-500 transition-colors duration-200 text-wrap flex flex-row cursor-pointer items-center"
+                      >
+                        {category.name}
+                        <FaArrowRight size={16} className="ml-2" />
+                      </span>
+                    ) : (
+                      <Link
+                        to={`/${category.id}`}
+                        className="text-lg text-gray-700 hover:text-orange-500 transition-colors duration-200 text-wrap"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {category.name}
+                      </Link>
+                    )}
+                  </div>
+                </li>
+              ))
+            )}
           </ul>
         </nav>
       </FocusLock>
