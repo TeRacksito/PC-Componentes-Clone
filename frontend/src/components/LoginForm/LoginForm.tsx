@@ -65,7 +65,7 @@ export const LoginForm: React.FC = () => {
 
         <Link
           to="/signup"
-          className="w-full bg-white border border-gray-900 hover:border-orange-500 text-gray-900 hover:text-orange-500 font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer"
+          className="w-full bg-white border border-gray-900 hover:border-orange-500 text-gray-900 hover:text-orange-500 font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer truncate"
         >
           No tengo cuenta, registrarme
         </Link>

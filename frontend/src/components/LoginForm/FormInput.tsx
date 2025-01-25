@@ -12,7 +12,7 @@ const FormInput: React.FC<FormInputProps> = ({ label, ...inputProps }) => {
         {...inputProps}
       />
       <label
-        className="absolute left-3 top-1 text-gray-500 text-sm transform scale-100 transition-all peer-placeholder-shown:top-5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-sm peer-focus:font-bold"
+        className="absolute left-3 top-1 text-gray-500 text-sm transform scale-100 transition-all peer-placeholder-shown:top-5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-sm peer-focus:font-bold text-ellipsis"
         htmlFor={inputProps.id || ""}
       >
         {label}

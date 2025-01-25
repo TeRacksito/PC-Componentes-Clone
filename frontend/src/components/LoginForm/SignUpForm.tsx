@@ -128,7 +128,7 @@ export const SignUpForm: React.FC = () => {
               "La contraseña debe contener al menos un número, una letra minúscula y una letra mayúscula",
               e,
             );
-          }}  
+          }}
           placeholder=" "
           minLength={8}
           maxLength={255}
@@ -144,7 +144,7 @@ export const SignUpForm: React.FC = () => {
 
         <Link
           to="/login"
-          className="w-full bg-white border border-gray-900 hover:border-orange-500 text-gray-900 hover:text-orange-500 font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer"
+          className="w-full bg-white border border-gray-900 hover:border-orange-500 text-gray-900 hover:text-orange-500 font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer truncate"
         >
           Ya tengo cuenta, iniciar sesión
         </Link>
