@@ -4,7 +4,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - "3306:3306"
+      - "127.0.0.1:3306:3306"
     volumes:
       - db_data:/var/lib/mysql
       - ./db-init:/docker-entrypoint-initdb.d
@@ -18,7 +18,7 @@ services:
   redis:
     image: redis:latest
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
       - redis_data:/data
@@ -41,7 +41,7 @@ services:
       PORT: 5011
       REDIS_URL: redis://redis:6379
     ports:
-      - "5011:5011"
+      - "127.0.0.1:5011:5011"
     depends_on:
       db:
         condition: service_healthy
