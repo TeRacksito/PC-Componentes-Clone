@@ -37,8 +37,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   }, [reload]);
 
   const setNewCount = async (value: number) => {
-    console.log("Setting new count:", value);
-
     setCount(value);
   };
 

@@ -30,8 +30,6 @@ export const SignUpForm: React.FC = () => {
         throw new Error("Sign up failed");
       }
 
-      console.log(signUpStatus.message);
-
       await login(email, password);
       navigate("/");
       reloadCart();

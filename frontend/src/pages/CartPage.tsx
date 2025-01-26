@@ -27,7 +27,6 @@ export function CartPage() {
     const fetchCart = async () => {
       try {
         const cart = await getCart();
-        console.log("Cart:", cart);
 
         setCartItems(cart);
       } catch (error) {
