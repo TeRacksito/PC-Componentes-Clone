@@ -12,4 +12,5 @@ dynamicRouter.use(categoryRoutes);
 
 dynamicRouter.use((_, res) => {
   res.status(404).json({ message: "Resource not found" });
+  return;
 });

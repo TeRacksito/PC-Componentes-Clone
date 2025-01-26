@@ -67,6 +67,7 @@ export const authClientByCredentials: RequestHandler = async (
     res.status(200).json({
       client: client.get({ plain: true }),
     });
+    return;
   } catch (error) {
     next(error);
   }
@@ -89,6 +90,7 @@ export const authClientById: RequestHandler = async (req, res, next) => {
     res.status(200).json({
       client: client.get({ plain: true }),
     });
+    return;
   } catch (error) {
     next(error);
   }
@@ -101,6 +103,7 @@ export const signInClient: RequestHandler = async (req, res, next) => {
     await signUpClientToDB(name, surname, email, username, password);
 
     res.status(200).send();
+    return;
   } catch (error) {
     if ((error as Error).name === "SequelizeUniqueConstraintError") {
       console.error(error);
@@ -120,6 +123,7 @@ export const logoutClient: RequestHandler = async (req, res, next) => {
     req.session.destroy(() => {
       res.clearCookie("connect.sid");
       res.status(200).send();
+      return;
     });
 
   } catch (error) {

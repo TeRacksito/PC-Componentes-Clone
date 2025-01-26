@@ -32,8 +32,7 @@ export const getProductBySlug: RequestHandler = async (req, res, next) => {
     }
 
     res.status(200).json(wrapSuccessResponse("product", productWithFlags[0]));
-
-    next();
+    return;
   } catch (error) {
     next(error);
   }
@@ -108,18 +107,6 @@ export const getProductsByCategorySlug: RequestHandler = async (
         products: productsWithFlags,
       } as PaginatedProducts),
     );
-
-    res.status(200).json({
-      type: "products",
-      page,
-      maxPages,
-      orderCriteria,
-      availableOrderCriteria: Object.keys(
-        ORDER_CRITERIA,
-      ) as ORDER_CRITERIA_TYPE[],
-      totalProducts,
-      data: products,
-    });
     return;
   } catch (error) {
     next(error);

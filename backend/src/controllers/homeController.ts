@@ -43,6 +43,7 @@ export const getHome: RequestHandler = async (req, res, next) => {
         featuredCategories,
       } as LandPageContent),
     );
+    return;
   } catch (error) {
     next(error);
   }

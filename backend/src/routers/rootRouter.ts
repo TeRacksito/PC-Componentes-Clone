@@ -8,6 +8,7 @@ export const rootRouter = Router();
 
 rootRouter.get("/health", (_, res) => {
   res.status(200).send("OK");
+  return;
 });
 
 rootRouter.use("/search", searchRoutes);

@@ -33,6 +33,7 @@ export const getCart: RequestHandler = async (req, res, next) => {
     )) as CartContent[];
 
     res.status(200).json(wrapSuccessResponse("cart", cartContent));
+    return;
   } catch (error) {
     next(error);
   }
@@ -83,6 +84,7 @@ export const addToCart: RequestHandler = async (req, res, next) => {
         cart.reduce((acc, { quantity }) => acc + quantity, 0),
       ),
     );
+    return;
   } catch (error) {
     next(error);
   }
@@ -134,6 +136,7 @@ export const updateCartItemQuantity: RequestHandler = async (
         cart.reduce((acc, { quantity }) => acc + quantity, 0),
       ),
     );
+    return;
   } catch (error) {
     next(error);
   }
@@ -176,6 +179,7 @@ export const removeFromCart: RequestHandler = async (req, res, next) => {
         cart.reduce((acc, { quantity }) => acc + quantity, 0),
       ),
     );
+    return;
   } catch (error) {
     next(error);
   }
