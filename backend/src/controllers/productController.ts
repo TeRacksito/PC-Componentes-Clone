@@ -31,7 +31,7 @@ export const getProductBySlug: RequestHandler = async (req, res, next) => {
       return;
     }
 
-    res.json(wrapSuccessResponse("product", productWithFlags[0]));
+    res.status(200).json(wrapSuccessResponse("product", productWithFlags[0]));
 
     next();
   } catch (error) {
@@ -96,7 +96,7 @@ export const getProductsByCategorySlug: RequestHandler = async (
       return;
     }
 
-    res.json(
+    res.status(200).json(
       wrapSuccessResponse("products", {
         page,
         maxPages,
@@ -109,7 +109,7 @@ export const getProductsByCategorySlug: RequestHandler = async (
       } as PaginatedProducts),
     );
 
-    res.json({
+    res.status(200).json({
       type: "products",
       page,
       maxPages,
@@ -141,7 +141,7 @@ export const searchProductsBySimilarName: RequestHandler = async (
       return;
     }
 
-    res.json(wrapSuccessResponse("products", products));
+    res.status(200).json(wrapSuccessResponse("products", products));
     return;
   } catch (error) {
     next(error);

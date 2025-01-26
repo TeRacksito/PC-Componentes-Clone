@@ -21,7 +21,7 @@ export const getCategoryBySlug: RequestHandler = async (req, res, next) => {
       return;
     }
 
-    res.json(
+    res.status(200).json(
       wrapSuccessResponse(
         "category",
         await getCategoryWithBreadcrumbFromDB(category),
@@ -35,7 +35,7 @@ export const getCategoryBySlug: RequestHandler = async (req, res, next) => {
 
 export const getRootCategories: RequestHandler = async (_, res, next) => {
   try {
-    res.json(
+    res.status(200).json(
       wrapSuccessResponse(
         "categories",
         (await getRootCategoriesFromDB()).map((category) =>
@@ -58,7 +58,7 @@ export const getChildCategories: RequestHandler = async (req, res, next) => {
       throw new Error("Category not found");
     }
 
-    res.json(
+    res.status(200).json(
       wrapSuccessResponse(
         "categories",
         (await getCategoryChildrenFromDB(category)).map((category) =>
@@ -87,7 +87,7 @@ export const getParentCategory: RequestHandler = async (req, res, next) => {
       throw new Error("Parent category not found");
     }
 
-    res.json(wrapSuccessResponse("category", parent.get({ plain: true })));
+    res.status(200).json(wrapSuccessResponse("category", parent.get({ plain: true })));
     return;
   } catch (error) {
     next(error);
@@ -111,7 +111,7 @@ export const searchCategoriesBySimilarName: RequestHandler = async (
       return;
     }
 
-    res.json(wrapSuccessResponse("categories", categories));
+    res.status(200).json(wrapSuccessResponse("categories", categories));
     return;
   } catch (error) {
     next(error);
@@ -143,7 +143,7 @@ export const getCategoriesWithBreadcrumbsByProduct: RequestHandler = async (
       categories.map((category) => getCategoryWithBreadcrumbFromDB(category)),
     );
 
-    res.json(wrapSuccessResponse("categories", categoriesWithBreadcrumbs));
+    res.status(200).json(wrapSuccessResponse("categories", categoriesWithBreadcrumbs));
     return;
   } catch (error) {
     next(error);

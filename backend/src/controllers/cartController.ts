@@ -32,7 +32,7 @@ export const getCart: RequestHandler = async (req, res, next) => {
       })),
     )) as CartContent[];
 
-    res.json(wrapSuccessResponse("cart", cartContent));
+    res.status(200).json(wrapSuccessResponse("cart", cartContent));
   } catch (error) {
     next(error);
   }
